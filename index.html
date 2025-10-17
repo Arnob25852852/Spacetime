@@ -276,6 +276,16 @@
         transform: translateY(-3px) ;
         cursor: pointer;
     }
+    iframe {
+        border-radius: 12px;
+        transition: box-shadow 5s ease, border-color 0.7s ease, transform 0.5s ease;
+    }
+    iframe:hover {
+        box-shadow: 0 0 32px 8px #a78bfa, 0 0 50px 20px #38bdf8, 0 0 60px 32px #34d399;
+        border-color: #fbbf24;
+        transform: scale3d(1.04, 1.04, 1.04);
+        cursor: zoom-in;
+    }
     </style>
 </head>
 <body>
@@ -530,32 +540,62 @@ T_{\text{matter}} \approx 0 \quad | \quad T_{\text{dark energy}} \gg 1
         <section class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
             <div>
                 <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Blackholes</h3>
-                <p class="text-gray-400 mb-6">
-                    How black holes slow down time.
-                </p>
-                <div class="bg-stone-900 rounded-lg p-6 h-64 border border-stone-700">
-                    <p class="text-gray-500">
-                        
-                    </p>
-                </div>
+              
+                
+                    <p>
+                        Black holes are the ultimate form of <i>frozen spacetime</i> — regions where the <b>timeflow</b> (\(T\)) becomes almost zero. Inside and near a black hole, time slows drastically due to extreme curvature. Matter is so dense that spacetime folds into itself, cutting off the normal flow of time.</p>
+
+                    <p>
+                        At the event horizon, the timeflow for an external observer effectively stops:</p>
+                    <p>\[
+                            T_{\text{black hole}} \to 0
+                        \]</p>
+
+<p>Within the black hole, time no longer progresses — it reaches a state where spacetime becomes nearly static. In this condition, all motion and change cease, and matter remains locked in a timeless state. Black holes are therefore <i>points of complete spacetime collapse</i>, where the <b>universal time</b> (\(t\)) still exists, but the <b>local timeflow</b> (\(T\)) does not.</p>
+<br><br><br>
+<div class="flex flex-col items-center relative group">
+    <img src="https://www.universetoday.com/article_images/bh_visualization_20250820_193402.jpg"
+         alt="History of the Universe"
+         class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+    <p class="text-gray-400 text-base text-center max-w-lg">
+        Black hole
+    </p>
+</div>
+                   
+                
             </div>
             
             <div>
                  <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Interstellar Voids</h3>
-                <p class="text-gray-400 mb-6">
-                    The vast, empty spaces between galaxies, where the effects of dark energy are most pronounced, spacetime is stretching the fastest, galaxies are moving away from each other at incredible speeds, and time flows most rapidly.
-                </p>      
+                <p>In contrast, interstellar voids represent the opposite extreme — vast regions of spacetime with <i>very high timeflow</i> and <i>very low density</i>.</p>
+
+<p>Here, the curvature of spacetime is minimal, allowing time to move faster than average:</p>
+<p>\[
+T_{\text{void}} \gg 1
+\]</p>
+
+<p>These regions are dominated by <b>dark energy</b>. Since the timeflow is extremely high, spacetime stretches outward rapidly, driving the universe’s expansion. Voids represent <i>hyperactive spacetime</i>, while black holes represent <i>frozen spacetime</i>. The contrast between them keeps the universe balanced — one side contracting, the other expanding — maintaining the cosmic equilibrium.</p>
+<br>
+<div class="flex flex-col items-center relative group">
+    <img src="https://media.moddb.com/cache/images/games/1/56/55401/thumb_620x2000/5777652096_81738f0a53_o.jpg"
+         alt="History of the Universe"
+         class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+    <p class="text-gray-400 text-base text-center max-w-lg">
+        Intersteller voids
+    </p>
+</div>
             </div>
         </section>
         <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
-                Some unclear concepts (not fully and properly understood yet)
+                Some unclear concepts (not completely and properly understood yet)
             </h3>
             <p class="text-white-400 mb-6">
             <b >1.</b>
                 "The universe itself expands because the time axis expands. Space (x, y, z) follows this growth, but matter does not expand, because its internal time is nearly zero. Thus, matter exists as frozen spacetime within the flowing sea of expanding spacetime."
             </p>
             <p class="text-white-400 mb-6">
+                <b >2.</b>
                 Additionally, the expansion of the universe affects the wavelength of light traveling through spacetime. As spacetime stretches, the wavelength of light also stretches, leading to a phenomenon known as redshift. This effect is commonly observed in distant galaxies, where the light they emit appears shifted towards the red end of the spectrum due to the expansion of spacetime over vast distances.
             </p>
         </section>
@@ -565,16 +605,30 @@ T_{\text{matter}} \approx 0 \quad | \quad T_{\text{dark energy}} \gg 1
                 Become bored of reading?
             </h3>
             <p class="text-white-400 mb-6">
-                Music can help you focus.
-            </p>
-            <button onclick="document.getElementById('bg-music').play()">Play Music</button>
-<button onclick="document.getElementById('bg-music').pause()">Pause Music</button>   
-    <audio id="bg-music" src="your-music-file.mp3" autoplay loop hidden></audio>
-    </section>
+                Watch these videos on the concept of Spacetime for better understanding:
+            </p><br>
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YNqTamaKMC8" 
+  title="What if we could see Spacetime? An immersive experience" frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen></iframe>
+<p class="text-center text-gray-500 py-8 border-t border-gray-700"> “What if we could see Spacetime? An immersive experience”</p>
+
+<!-- Video 2: I never understood why matter curves spacetime… -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qKZvAwcXceE" 
+  title="I never understood why matter curves spacetime… until now!" frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen></iframe>
+<p class="text-center text-gray-500 py-8 border-t border-gray-700"> “I never understood why matter curves spacetime… until now!”</p>
+</div>
+        </section>
+
     <footer class="text-center text-gray-500 py-8 border-t border-gray-700">
-        Website designed and developed by <a href="mailto:88arnob88@gmail.com" class="text-blue-400 hover:underline">Deb Arnob Barai</a>.<br>
-        Every thing that is mentioned here is my own way of defining spacetime and may contain some information which are different from the conventional understanding. Please verify from reliable sources.<br>
-        &copy; 2024 Spacetime Exploration. All rights reserved.
+        Website designed and developed by <a href="mailto:88arnob88@gmail.com" class="text-blue-400 hover:underline font-medium">
+      Deb Arnob Barai
+    </a>.<br>
+        Every thing that is mentioned here is my own way of defining spacetime and may contain some information which are different from the conventional understanding. <i>Its new, its logical and it is absolute.</i><br>
+        &copy; 2025 Spacetime Exploration. All rights reserved.
     </footer>
 </main>
 
