@@ -65,7 +65,7 @@
             text-shadow: 0 0 8px #a78bfa, 0 0 16px #f472b6;
         }
         p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
             line-height: 1.6;
             color: #fffefe;
@@ -313,7 +313,7 @@
             <p class="text-lg text-gray-400">
                 Explore Einstein's fundamental concept through interactive visualizations and engaging data models.
             </p>
-            <a href="#main-content" class="inline-block mt-8 bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-xl shadow-purple-900/50">
+            <a id="startLink" href="#main-content" class="inline-block mt-8 bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-xl shadow-purple-900/50">
                 Begin Exploration
             </a>
         </div>
@@ -644,6 +644,15 @@ T_{\text{void}} \gg 1
         Every thing that is mentioned here is my own way of defining spacetime and may contain some information which are different from the conventional understanding. <i>Its new, its logical and it is absolute.</i><br>
         &copy; 2025 Spacetime Exploration. All rights reserved.
     </footer>
+    <button id="musicToggle" class="
+        fixed bottom-4 right-4 z-50 p-4 rounded-full 
+        bg-purple-700 hover:bg-purple-600 text-white 
+        shadow-2xl shadow-purple-900/80 transition duration-300 
+        transform hover:scale-110 active:scale-90 opacity-0 pointer-events-none"
+        aria-label="Toggle Background Music"> 
+        <!-- Icon will be inserted by Lucide/JavaScript -->
+        <i data-lucide="volume-2" class="w-6 h-6"></i>
+    </button>
 </main>
 
     <!-- fullscreen image modal -->
@@ -660,9 +669,111 @@ T_{\text{void}} \gg 1
     <img id="fullscreen-img" src="" alt="Fullscreen" style="max-width:98vw; max-height:95vh; border-radius:1rem; box-shadow:0 0 40px #38bdf8; transition: transform 0.3s cubic-bezier(.4,0,.2,1); background:#18181b;" />
 </div>
   
-
+<audio id="backgroundAudio" src="soundtrack for Html (edited).mp3" preload="auto" loop muted></audio>
 
     <script>
+    // Audio autoplay handling
+  document.addEventListener('DOMContentLoaded', (event) => {
+            const startLink = document.getElementById('startLink');
+            const audio = document.getElementById('backgroundAudio');
+            const musicToggle = document.getElementById('musicToggle');
+            const toggleIconContainer = musicToggle.querySelector('i');
+            
+            const targetVolume = 0.4; // Background music volume (40%)
+            const fadeDuration = 3000;  // 3 seconds fade-in
+
+            // --- FADE IN LOGIC ---
+
+            function fadeInVolume(audioElement, finalVolume, duration) {
+                // Ensure volume is at zero before starting the fade
+                audioElement.volume = 0; 
+                const steps = 60; 
+                const intervalTime = duration / steps; 
+                const volumeStep = finalVolume / steps;
+
+                const fadeInterval = setInterval(() => {
+                    if (audioElement.volume < finalVolume) {
+                        audioElement.volume = Math.min(finalVolume, audioElement.volume + volumeStep);
+                    } else {
+                        clearInterval(fadeInterval);
+                        audioElement.volume = finalVolume; // Ensure it hits the target exactly
+                    }
+                }, intervalTime);
+            }
+
+            // --- INITIAL CLICK HANDLER ---
+
+            if (startLink && audio && musicToggle) {
+                startLink.addEventListener('click', function(e) {
+                    
+                    // 1. User Gesture: Play and Unmute
+                    audio.muted = false; 
+                    audio.play()
+                        .then(() => {
+                            // 2. Start the smooth volume fade-in
+                            fadeInVolume(audio, targetVolume, fadeDuration);
+                            
+                            // 3. Show the toggle button immediately after starting
+                            musicToggle.classList.remove('opacity-0', 'pointer-events-none');
+                            musicToggle.classList.add('opacity-100');
+                            
+                            // 4. Update the toggle icon to 'Pause' since it is now playing
+                            updateToggleIcon('playing');
+
+                            // 5. Remove the listener to prevent repeated fade-ins
+                            startLink.removeEventListener('click', arguments.callee);
+                            startLink.style.display = 'none'; // Optional: hide the start button
+                        })
+                        .catch(error => {
+                            console.warn("Autoplay was blocked. Music control button still available, but requires click.");
+                            // If play fails, we still show the control so user can try manually
+                            musicToggle.classList.remove('opacity-0', 'pointer-events-none');
+                            musicToggle.classList.add('opacity-100');
+                            updateToggleIcon('paused');
+                        });
+                });
+            }
+
+            // --- MUSIC TOGGLE HANDLER ---
+
+            function updateToggleIcon(state) {
+                // Clear old icon/content
+                toggleIconContainer.innerHTML = ''; 
+                
+                // Create new icon element
+                const icon = document.createElement('i');
+                icon.classList.add('w-6', 'h-6');
+
+                if (state === 'playing') {
+                    icon.setAttribute('data-lucide', 'volume-2'); // Speaker with sound waves
+                } else {
+                    icon.setAttribute('data-lucide', 'volume-x'); // Speaker with mute sign
+                }
+                toggleIconContainer.appendChild(icon);
+                
+                // Rerender Lucide icons
+                lucide.createIcons(); 
+            }
+
+            musicToggle.addEventListener('click', () => {
+                if (audio.paused) {
+                    // It was paused, so we play it
+                    audio.play().catch(error => {
+                        console.error("Manual play failed:", error);
+                    });
+                    updateToggleIcon('playing');
+                } else {
+                    // It was playing, so we pause it
+                    audio.pause();
+                    updateToggleIcon('paused');
+                }
+            });
+
+            // Initial icon setup (it will be hidden, but correct state needed if it shows up)
+            updateToggleIcon('paused');
+        });
+
+
         document.addEventListener('DOMContentLoaded', () => {
             // --- STARFIELD GENERATION ---
             function randomBetween(a, b) {
