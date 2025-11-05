@@ -57,7 +57,7 @@
             border-bottom: 2px solid #a78bfa;
             padding-bottom: 0.5rem;
             letter-spacing: 0.02em;
-            transition: color 0.9s cubic-bezier(.4,0,.2,1), border-color 0.6s cubic-bezier(.4,0,.2,1), text-shadow 0.7s cubic-bezier(.4,0,.2,1);
+            transition: color 1.2s cubic-bezier(.4,0,.2,1), border-color 0.6s cubic-bezier(.4,0,.2,1), text-shadow 0.7s cubic-bezier(.4,0,.2,1);
         }
         h3:hover {
             color: #eeeded;
@@ -286,12 +286,15 @@
         transform: scale3d(1.04, 1.04, 1.04);
         cursor: zoom-in;
     }
+    p{
+        color: #e0e0e0;
+    }
     </style>
 </head>
 <body>
 
     <!-- 3. Add the new fixed top-left title (hidden by default) just after <body> -->
-    <h1 id="fixed-title" class="cursive-title text-purple-400 font-extrabold text-3xl fixed top-4 left-6 z-[9999] opacity-0 pointer-events-none transition-opacity duration-700">
+    <h1 id="fixed-title" class="cursive-title text-purple-400 font-extrabold text-2xl fixed top-4 left-6 z-[9999] opacity-0 pointer-events-none transition-opacity duration-700">
         Spacetime
     </h1>
 
