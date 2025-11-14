@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,35 +21,42 @@
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
         .cursive-title {
             font-family: 'Dancing Script', cursive;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0c0a09; /* Deep Black for Space */
+            background-color: #0c0a09;
+            /* Deep Black for Space */
             color: #e2e8f0;
             line-height: 1.6;
         }
+
         h1 {
             font-size: larger;
             font-weight: bolder;
             transition: color 1s ease-in-out, text-shadow 0.5s ease-in-out;
         }
+
         h1:hover {
             color: #a58eeb;
             text-shadow: 0 0 1px #a78bfa, 0 0 15px #a78bfa;
         }
-        h2{
+
+        h2 {
             font-size: 2.5rem;
             font-weight: 900;
             margin-bottom: 1rem;
             transition: color 1s ease-in-out, text-shadow 0.5s ease-in-out;
-          }
+        }
+
         h2:hover {
             color: #a58eeb;
             text-shadow: 0 0 1px #a78bfa, 0 0 15px #a78bfa;
         }
+
         h3 {
             font-size: 2rem;
             font-weight: 700;
@@ -57,13 +65,15 @@
             border-bottom: 2px solid #a78bfa;
             padding-bottom: 0.5rem;
             letter-spacing: 0.02em;
-            transition: color 1.2s cubic-bezier(.4,0,.2,1), border-color 0.6s cubic-bezier(.4,0,.2,1), text-shadow 0.7s cubic-bezier(.4,0,.2,1);
+            transition: color 1.2s cubic-bezier(.4, 0, .2, 1), border-color 0.6s cubic-bezier(.4, 0, .2, 1), text-shadow 0.7s cubic-bezier(.4, 0, .2, 1);
         }
+
         h3:hover {
             color: #eeeded;
             border-color: #f472b6;
             text-shadow: 0 0 8px #a78bfa, 0 0 16px #f472b6;
         }
+
         p {
             font-size: 1.1rem;
             margin-bottom: 1rem;
@@ -77,14 +87,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 5rem; /* Massive on desktop */
+            font-size: 5rem;
+            /* Massive on desktop */
             z-index: 100;
             /* Smoother transition: 1s duration, ease-in-out curve for smooth return */
-            transition: all 1s ease-in-out; 
+            transition: all 1s ease-in-out;
             padding: 0.5rem 1rem;
-            text-shadow: 0 0 30px rgba(124, 58, 237, 0.9); /* Vibrant purple shadow */
+            text-shadow: 0 0 30px rgba(124, 58, 237, 0.9);
+            /* Vibrant purple shadow */
             background-color: transparent;
-            pointer-events: none; /* Allows clicks to pass through to the element below */
+            pointer-events: none;
+            /* Allows clicks to pass through to the element below */
         }
 
         /* Final state for the title (Top Left, Small) */
@@ -93,11 +106,13 @@
             left: 1.5rem;
             right: auto;
             transform: none;
-            font-size: 2.25rem; /* text-3xl */
-            box-shadow: none; 
-            background-color: transparent; 
-            padding: 0; 
-            text-shadow: 0 0 10px rgba(124, 58, 237, 0.5); /* Subtle shadow when minimized */
+            font-size: 2.25rem;
+            /* text-3xl */
+            box-shadow: none;
+            background-color: transparent;
+            padding: 0;
+            text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+            /* Subtle shadow when minimized */
         }
 
         /* Hero Section Styling and Starfield Container */
@@ -110,7 +125,8 @@
             position: relative;
             /* Starfield gradient background */
             background: linear-gradient(180deg, #1e1b4b 0%, #0c0a09 100%);
-            overflow: hidden; /* Important to hide stars outside the hero area */
+            overflow: hidden;
+            /* Important to hide stars outside the hero area */
         }
 
         /* --- Starfield CSS for Format Change --- */
@@ -124,6 +140,7 @@
             z-index: 1;
             overflow: hidden;
         }
+
         .star {
             position: absolute;
             border-radius: 50%;
@@ -131,9 +148,12 @@
             width: 2px;
             height: 2px;
             will-change: opacity;
-            opacity: 0.7; /* Default, overridden by JS for random brightness */
-            animation: blinkStar 4s infinite; /* Slower animation by default */
+            opacity: 0.7;
+            /* Default, overridden by JS for random brightness */
+            animation: blinkStar 4s infinite;
+            /* Slower animation by default */
         }
+
         .star.medium {
             background: #ffc;
             width: 3px;
@@ -141,31 +161,66 @@
             opacity: 1;
             animation-duration: 5s;
         }
+
         @keyframes blinkStar {
-            0% { opacity: 0; }
-            10% { opacity: 0.2; }
-            20% { opacity: 0.7; }
-            30% { opacity: 0.4; }
-            40% { opacity: 0.9; }
-            50% { opacity: 0; }
-            60% { opacity: 0.8; }
-            70% { opacity: 0.5; }
-            80% { opacity: 1; }
-            90% { opacity: 0.3; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.2;
+            }
+
+            20% {
+                opacity: 0.7;
+            }
+
+            30% {
+                opacity: 0.4;
+            }
+
+            40% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            60% {
+                opacity: 0.8;
+            }
+
+            70% {
+                opacity: 0.5;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
-        
+
         #main-content {
-            padding-top: 7rem; /* Adjust as needed for spacing below the title */
+            padding-top: 7rem;
+            /* Adjust as needed for spacing below the title */
         }
 
         /* Smooth fade-in for sections */
         .fade-section {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+            transition: opacity 0.8s cubic-bezier(.4, 0, .2, 1), transform 0.8s cubic-bezier(.4, 0, .2, 1);
         }
+
         .fade-section.visible {
             opacity: 1;
             transform: translateY(0);
@@ -175,132 +230,283 @@
         #relativity-sign {
             display: inline-block;
             font-size: 1.7rem;
-            transition: opacity 1.2s cubic-bezier(.4,0,.2,1);
+            transition: opacity 1.2s cubic-bezier(.4, 0, .2, 1);
             opacity: 1;
         }
+
         #relativity-sign.hide {
             opacity: 0;
         }
 
         /* Remove gradient hover effect for Spacetime name */
-    .cursive-title {
-        font-family: 'Dancing Script', cursive;
-        /* Remove gradient and transitions */
-        color: #a78bfa;
-    }
+        .cursive-title {
+            font-family: 'Dancing Script', cursive;
+            /* Remove gradient and transitions */
+            color: #a78bfa;
+        }
 
-    /* Custom cool scrollbar styling */
-    ::-webkit-scrollbar {
-        width: 12px;
-        background: #18181b;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%);
-        border-radius: 6px;
-        border: 2px solid #18181b;
-        box-shadow: 0 0 8px #a78bfa88;
-        transition: background 0.5s ease, box-shadow 0.5s ease;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #f472b6 0%, #a78bfa 50%, #fbbf24 100%);
-        box-shadow: 0 0 12px #f472b688;
-        cursor: grabbing;
-    }
-    ::-webkit-scrollbar-track {
-        background: #18181b;
-        border-radius: 6px;
-    }
+        /* Custom cool scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: #18181b;
+        }
 
-    /* For Firefox */
-    html {
-        scrollbar-width: thin;
-        scrollbar-color: #a78bfa #18181b;
-    }
-    b{
-        color: #ff8ac7;
-        font-weight: bold;
-        text-transform: capitalize;
-        text-shadow: 0 0 1px #ff8ac7, 0 0 5px #ff8ac7;
-        transition: color 1.2s ease-in-out, text-shadow 0.8s ease-in-out , transform 0.5s ease;
-    }
-    b:hover{
-        color: #f5e8f1;
-        text-shadow: 0 0 2px #ff8ac7, 0 0 8px #ff8ac7;
-        cursor: help;
-    }
-    i{
-        color: #a0ddc6;
-        font-style: italic;
-        text-shadow: 0 0 1px #34d399, 0 0 5px #34d399;
-        transition: color 1.2s ease-in-out, text-shadow 0.8s ease-in-out;
-    }
-    i:hover{
-        color: #e0f7f4;
-        text-shadow: 0 0 2px #34d399, 0 0 8px #34d399;
-    }
-    strong{
-        opacity: 0.01;
-        transition: color 1.2s ease-in-out, text-shadow 0.8s ease-in-out , transform 0.5s ease, opacity 3s ease;
-    }
-    strong:hover{
-        
-        opacity: 1;
-    }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%);
+            border-radius: 6px;
+            border: 2px solid #18181b;
+            box-shadow: 0 0 8px #a78bfa88;
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+        }
 
-    img {
-    transition: box-shadow 3s cubic-bezier(.4,0,.2,1), border-color 0.7s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1);
-}
-    img:hover {
-     box-shadow: 0 0 32px 8px #a78bfa, 0 0 50px 20px #38bdf8, 0 0 80px 32px #34d399;
-    border-color: #fbbf24;
-    cursor: zoom-in;
-    transform: scale3d(1.04, 1.04, 1.04);
-}
-    a {
-        text-decoration: none;
-        color: #38bdf8;
-        font-weight: 600;
-        transition: color 0.8s ease-in-out, text-shadow 0.8s ease-in-out, transform 0.8s ease, scale 2s ease;
-    }
-    a:hover {
-        text-shadow: 0 0 5px #34d399, 0 0 15px #f3f7f5;
-        transform: translateY(-3px) scale(1.05);
-        width: fit-content;
-    }
-    button{
-        transition: background-color 0.7s ease, box-shadow 0.5s ease, transform 0.3s ease;
-    }
-    button:hover{
-        background-color: #f472b6;
-        box-shadow: 0 0 12px #f472b6;
-        transform: translateY(-3px) ;
-        cursor: pointer;
-    }
-    iframe {
-        border-radius: 12px;
-        transition: box-shadow 5s ease, border-color 0.7s ease, transform 0.5s ease;
-    }
-    iframe:hover {
-        box-shadow: 0 0 32px 8px #a78bfa, 0 0 50px 20px #38bdf8, 0 0 60px 32px #34d399;
-        border-color: #fbbf24;
-        transform: scale3d(1.04, 1.04, 1.04);
-        cursor: zoom-in;
-    }
-    p{
-        color: #e0e0e0;
-    }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f472b6 0%, #a78bfa 50%, #fbbf24 100%);
+            box-shadow: 0 0 12px #f472b688;
+            cursor: grabbing;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #18181b;
+            border-radius: 6px;
+        }
+
+        /* For Firefox */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #a78bfa #18181b;
+        }
+
+        b {
+            color: #ff8ac7;
+            font-weight: bold;
+            text-transform: capitalize;
+            text-shadow: 0 0 1px #ff8ac7, 0 0 5px #ff8ac7;
+            transition: color 1.2s ease-in-out, text-shadow 0.8s ease-in-out, transform 0.5s ease;
+        }
+
+        b:hover {
+            color: #f5e8f1;
+            text-shadow: 0 0 2px #ff8ac7, 0 0 8px #ff8ac7;
+            cursor: help;
+        }
+
+        i {
+            color: #a0ddc6;
+            font-style: italic;
+            text-shadow: 0 0 1px #34d399, 0 0 5px #34d399;
+            transition: color 1.2s ease-in-out, text-shadow 0.8s ease-in-out;
+        }
+
+        i:hover {
+            color: #e0f7f4;
+            text-shadow: 0 0 2px #34d399, 0 0 8px #34d399;
+        }
+
+        strong {
+            opacity: 0.01;
+            transition: color 1.2s ease-in-out, text-shadow 0.8s ease-in-out, transform 0.5s ease, opacity 3s ease;
+        }
+
+        strong:hover {
+
+            opacity: 1;
+        }
+
+        img {
+            transition: box-shadow 3s cubic-bezier(.4, 0, .2, 1), border-color 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.5s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        img:hover {
+            box-shadow: 0 0 32px 8px #a78bfa, 0 0 50px 20px #38bdf8, 0 0 80px 32px #34d399;
+            border-color: #fbbf24;
+            cursor: zoom-in;
+            transform: scale3d(1.04, 1.04, 1.04);
+        }
+
+        a {
+            text-decoration: none;
+            color: #38bdf8;
+            font-weight: 600;
+            transition: color 0.8s ease-in-out, text-shadow 0.8s ease-in-out, transform 0.8s ease, scale 2s ease;
+        }
+
+        a:hover {
+            text-shadow: 0 0 5px #34d399, 0 0 15px #f3f7f5;
+            transform: translateY(-3px) scale(1.05);
+            width: fit-content;
+        }
+
+        button {
+            transition: background-color 0.7s ease, box-shadow 0.5s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f472b6;
+            box-shadow: 0 0 12px #f472b6;
+            transform: translateY(-3px);
+            cursor: pointer;
+        }
+
+        iframe {
+            border-radius: 12px;
+            transition: box-shadow 5s ease, border-color 0.7s ease, transform 0.5s ease;
+        }
+
+        iframe:hover {
+            box-shadow: 0 0 32px 8px #a78bfa, 0 0 50px 20px #38bdf8, 0 0 60px 32px #34d399;
+            border-color: #fbbf24;
+            transform: scale3d(1.04, 1.04, 1.04);
+            cursor: zoom-in;
+        }
+
+        p {
+            color: #e0e0e0;
+        }
+
+        /* Equation bar for clear display */
+        .equation-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: linear-gradient(180deg, rgba(167, 139, 250, 0.06), rgba(56, 189, 248, 0.03));
+            border: 1px solid rgba(167, 139, 250, 0.14);
+            box-shadow: 0 6px 30px rgba(16, 10, 30, 0.6);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            margin: 1rem 0 1.5rem;
+            color: #e6eefb;
+            transition: box-shadow 1s ease;
+        }
+
+        .equation-bar:hover {
+            box-shadow: 0 8px 40px rgba(137, 100, 223, 2);
+
+        }
+
+        .equation-bar .quantities {
+            flex: 1 1 55%;
+            min-width: 240px;
+            list-style: none;
+            padding-left: 0.6rem;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .equation-bar .quantities li {
+            margin: 0;
+            padding: 0.15rem 0.25rem;
+            line-height: 1.2;
+        }
+
+        .equation-bar .equation {
+            flex: 1 1 40%;
+            min-width: 240px;
+            text-align: left;
+            font-size: large;
+            padding: 0;
+            margin: 0;
+        }
+
+        .equation-bar .equation .eq-tex {
+            display: block;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #f3f4ff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.15;
+        }
+
+        .symbol {
+            border-bottom: .5px dashed #ba8c18;
+            cursor: help;
+            transition: color 0.8s ease-in-out, border-bottom 5s ease-in-out;
+        }
+
+        .symbol:hover {
+            border-bottom: 1px solid #fbbf24;
+        }
+
+        /* small screens: stack nicely */
+        @media (max-width: 720px) {
+            .equation-bar {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .equation-bar .equation,
+            .equation-bar .quantities {
+                flex: 1 1 100%;
+                min-width: unset;
+            }
+
+            .equation-bar .equation .eq-tex {
+                font-size: 1.6rem;
+                text-align: center;
+                width: 100%;
+                display: block;
+            }
+        }
+
+        /* Floating tooltip for quantities (insert into existing <style>) */
+        .tooltip-floating {
+            position: fixed;
+            z-index: 1000000;
+            background: rgba(8, 10, 20, 0.96);
+            color: #e6eefb;
+            padding: 10px 14px;
+            border-radius: 10px;
+            box-shadow: 0 8px 40px rgba(2, 6, 23, 0.75);
+            max-width: 340px;
+            font-size: 0.95rem;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px) scale(0.985);
+            transition: opacity 280ms cubic-bezier(.4, 0, .2, 1), transform 280ms cubic-bezier(.4, 0, .2, 1);
+            line-height: 1.4;
+        }
+
+        .tooltip-floating.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .tooltip-floating .title {
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+
+        .tooltip-floating .body {
+            color: #dbeafe;
+            font-size: 0.93rem;
+        }
+
+        /* Slight highlight for the hovered quantity item */
+        .equation-bar .quantities li:hover {
+            background: rgba(193, 174, 249, 0.03);
+            border-radius: 6px;
+            transition: background 200ms ease;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- 3. Add the new fixed top-left title (hidden by default) just after <body> -->
-    <h1 id="fixed-title" class="cursive-title text-purple-400 font-extrabold text-2xl fixed top-4 left-6 z-[9999] opacity-0 pointer-events-none transition-opacity duration-700">
+    <h1 id="fixed-title"
+        class="cursive-title text-purple-400 font-extrabold text-2xl fixed top-4 left-6 z-[9999] opacity-0 pointer-events-none transition-opacity duration-700">
         Spacetime
     </h1>
 
     <!-- 2. Hero Section (To be scrolled past) -->
     <section id="hero-section" class="hero-space">
-        
+
         <!-- Animated Starfield Background (Format Change) -->
         <div class="stars" id="starfield"></div>
 
@@ -309,14 +515,17 @@
             <p class="text-xl text-purple-400 mb-4 animate-pulse">
                 <span id="relativity-sign">//Relative</span>
             </p>
-            <h1 style="font-size: 4rem;"><span id="inline-title" class="cursive-title text-purple-400 transition-opacity duration-700">Spacetime</span></h1>
-            <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight flex flex-wrap items-center justify-center gap-2">
+            <h1 style="font-size: 4rem;"><span id="inline-title"
+                    class="cursive-title text-purple-400 transition-opacity duration-700">Spacetime</span></h1>
+            <h2
+                class="text-4xl md:text-6xl font-black mb-6 leading-tight flex flex-wrap items-center justify-center gap-2">
                 Grasp the <span class="text-purple-300">Fabric of Reality</span>
             </h2>
             <p class="text-lg text-gray-400">
                 Explore Einstein's fundamental concept through interactive visualizations and engaging data models.
             </p>
-            <a id="startLink" href="#main-content" class="inline-block mt-8 bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-xl shadow-purple-900/50">
+            <a id="startLink" href="#main-content"
+                class="inline-block mt-8 bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-xl shadow-purple-900/50">
                 Begin Exploration
             </a>
         </div>
@@ -324,49 +533,59 @@
 
     <!-- 3. Main Content (Appears when scrolled down) -->
     <main id="main-content" class="min-h-[200vh] p-8 md:p-16 bg-[#0c0a09] relative z-50">
-        
+
         <!-- Feature 1a: What is Spacetime? -->
         <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 What is Spacetime?
             </h3>
             <p>
-                Spacetime is the <b>foundation of the universe.</b> It is everything that exists, the stage and the flow at the same time. It has <i>four dimensions</i> — three of space <i>(x, y, and z axes)</i> and one of time <i>(t).</i>
+                Spacetime is the <span class="symbol" data-desc-id="desc-foundation"><b>Foundation of the
+                        Universe.</b></span> It is everything that exists, the stage and the flow at the same time. It
+                has <i>four dimensions</i> — three of space <i>(x, y, and z axes)</i> and one of time <i>(t).</i>
             </p>
             <br>
             <div class="flex flex-col items-center relative group">
                 <img src="https://www.shutterstock.com/shutterstock/videos/1062567853/thumb/12.jpg?ip=x480"
-                     alt="Spacetime 3D Visualization"
-                     class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-               
-            <p class="text-gray-400 text-base text-center max-w-lg">
-                A visual representation of spacetime curvature: massive objects like the sun bend the fabric of space around them, creating gravity wells.
-            </p>
-        </div>
-        <p class="mt-6">
-            Time is the <b>driving axis.</b> Its flow gives the universe direction, <i>carrying reality from past to future.</i> As time moves forward, the universe unfolds and expansion takes place.(Not the cause for it) The growth of the time axis is what makes everything evolve and change.
-        </p>
-<br><br>
-<div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
-       <div class="flex flex-col items-center relative group">
-                <img src="https://cosmosatyourdoorstep.com/wp-content/uploads/2017/09/1000_f_484306188_nk7q2c6sbjimen6gjxzwhmxgrw8j83c3.jpg"
-                     alt="Gravitational Waves in Spacetime"
-                     class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" style="max-width: 480px;" />
+                    alt="Spacetime 3D Visualization"
+                    class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+
                 <p class="text-gray-400 text-base text-center max-w-lg">
-                   Bend in spacetime caused by gravitational waves, rippling through the fabric of the universe.
+                    A visual representation of spacetime curvature: massive objects like the sun bend the fabric of
+                    space around them, creating gravity wells.
                 </p>
             </div>
-        
-<div>
-        <p class="mt-6">
-            Space forms the <i>structural part of spacetime.</i> The three dimensions — x, y, and z — provide the framework within which events happen. Together with the time axis, they create the full fabric of the universe.
-        </p>
-        
-        <p class="mt-6">
-            Curvature in spacetime arises when the flow of time is not uniform. Where time slows or shifts, spacetime bends. This bending defines the shape and behavior of reality, as all things exist within the fabric of spacetime.
-        </p>
-        </div>
-        </div>
+            <p class="mt-6">
+                Time is the <b>driving axis.</b> Its flow gives the universe direction, <i>carrying reality from past to
+                    future.</i> As time moves forward, the universe unfolds and expansion takes place.(Not the cause for
+                it) The growth of the time axis is what makes everything evolve and change.
+            </p>
+            <br><br>
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://cosmosatyourdoorstep.com/wp-content/uploads/2017/09/1000_f_484306188_nk7q2c6sbjimen6gjxzwhmxgrw8j83c3.jpg"
+                        alt="Gravitational Waves in Spacetime"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover"
+                        style="max-width: 480px;" />
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Bend in spacetime caused by gravitational waves, rippling through the fabric of the universe.
+                    </p>
+                </div>
+
+                <div>
+                    <p class="mt-6">
+                        Space forms the <span class="symbol" data-desc-id="desc-structural-part"><i> structural part of
+                                spacetime.</i></span> The three dimensions — x, y, and z — provide the framework within
+                        which events happen. Together with the time axis, they create the full fabric of the universe.
+                    </p>
+
+                    <p class="mt-6">
+                        Curvature in spacetime arises when the flow of time is not uniform. Where time slows or shifts,
+                        spacetime bends. This bending defines the shape and behavior of reality, as all things exist
+                        within the fabric of spacetime.
+                    </p>
+                </div>
+            </div>
         </section>
         <!-- Feature 1b: Bending of Spacetime (Gravity and Mass) -->
         <section class="mb-24 fade-section">
@@ -374,228 +593,368 @@
                 How Does Spacetime Bend?
             </h3>
             <p>
-                It's <b>gravity</b> that causes spacetime to bend, but it's important to understand the relationship precisely.
-<br><br>
+                It's <span class="symbol" data-desc-id="desc-gravity"><b>Gravity</b></span> that causes spacetime to
+                bend, but it's important to understand the relationship precisely.
+                <br><br>
 
-Mass is simply a <b>concentrated</b> form of energy, and it's the presence of this mass-energy that curves spacetime. All forms of energy, including immense <i>kinetic energy, internal energy (like nuclear energy), and cosmic radiation</i>, are capable of warping this four-dimensional fabric.
-<br><br>
-In this context, gravity isn't a force; it is the curvature of spacetime. The denser an object is, the greater its concentration of energy, and thus the more it bends spacetime. This effect is most notable around large objects like planets, stars, and black holes. <br><br>
+                Mass is simply a <b>concentrated</b> form of energy, and it's the presence of this mass-energy that
+                curves spacetime. All forms of energy, including immense <i><span class="symbol"
+                        data-desc-id="desc-kinetic-energy">kinetic energy</span>, internal energy (like <span
+                        class="symbol" data-desc-id="desc-nuclear-energy">nuclear energy</span> ), and <span
+                        class="symbol" data-desc-id="desc-cosmic-radiation">cosmic radiation</span></i>, are capable of
+                warping this four-dimensional fabric.
+                <br><br>
+                In this context, gravity isn't a force; it is the curvature of spacetime. The denser an object is, the
+                greater its concentration of energy, and thus the more it bends spacetime. This effect is most notable
+                around large objects like planets, stars, and black holes. <br><br>
 
             </p>
             <br>
-<div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
- <div class="flex flex-col items-center relative group">
-                <img src="https://bigthink.com/wp-content/uploads/2021/11/ezgif-5-014fc9ef71.gif?resize=640,640"
-                     alt="3D representation of spacetime"
-                     class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" style="max-width: 480px;" />
-               
-            <p class="text-gray-400 text-base text-center max-w-lg">
-                3D representation of spacetime which is bending due to the presence of moving mass.
-            </p>
-        </div>
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://bigthink.com/wp-content/uploads/2021/11/ezgif-5-014fc9ef71.gif?resize=640,640"
+                        alt="3D representation of spacetime"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover"
+                        style="max-width: 480px;" />
 
-            <div class="flex flex-col items-center relative group"> <br>
-                <img src="https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/16024953/blackhole_gif.gif?quality=90&strip=all&crop=7.7857142857143%2C0%2C84.428571428571%2C100&w=750"
-                     alt="Spacetime Bending Visualization"
-                     class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-                <p class="text-gray-400 text-base text-center max-w-lg">
-                    Visualization: Black holes create extreme curvature in spacetime, leading to phenomena like <i>gravitational lensing</i>.
-                </p>
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        3D representation of spacetime which is bending due to the presence of moving mass.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-center relative group"> <br>
+                    <img src="https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/16024953/blackhole_gif.gif?quality=90&strip=all&crop=7.7857142857143%2C0%2C84.428571428571%2C100&w=750"
+                        alt="Spacetime Bending Visualization"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Visualization: Black holes create extreme curvature in spacetime, leading to phenomena like
+                        <i>gravitational lensing</i>.
+                    </p>
+                </div>
             </div>
-    </div>        
-         </section>
- <!-- section 3-->
-    <section class="mb-24 fade-section">
+        </section>
+        <!-- section 3-->
+        <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 How Does Spacetime Stretch?
             </h3>
             <p class="text-white-400 mb-6">
-                The expansion of the universe—the large-scale "stretching" of spacetime—is driven by a different, mysterious component called <b>dark energy</b>.
+                The expansion of the universe—the large-scale "stretching" of spacetime—is driven by a different,
+                mysterious component called <span class="symbol" data-desc-id="desc-dark-energy"><b>dark
+                        energy</b></span>.
             </p>
-<div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section"> 
-    <div>
-        <br>
-            <p class="text-white-400 mb-6">
-                Dark energy acts opposite to gravity and all other known attractive energy. It is a <i>repulsive</i> energy that tries to push matter apart, causing the universe to expand. <b>The universe is the total volume of spacetime</b>; therefore, every stretch of spacetime means the <i>universe expands</i>.
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
+                <div>
+                    <br>
+                    <p class="text-white-400 mb-6">
+                        Dark energy acts opposite to gravity and all other known attractive energy. It is a
+                        <i>repulsive</i> energy that tries to push matter apart, causing the universe to expand. <b>The
+                            universe is the total volume of spacetime</b>; therefore, every stretch of spacetime means
+                        the <i>universe expands</i>.
 
-            </p>
-            <p class="text-white-400 mb-6">
-                Since the universe is expanding, <i>time flows forward</i>. So, in short, dark energy makes spacetime expand, which causes time to flow forward. The more rapidly the universe expands, the more quickly time seems to flow.
+                    </p>
+                    <p class="text-white-400 mb-6">
+                        Since the universe is expanding, <i>time flows forward</i>. So, in short, dark energy makes
+                        spacetime expand, which causes time to flow forward. The more rapidly the universe expands, the
+                        more quickly time seems to flow.
 
-            </p>
-        </div> 
+                    </p>
+                </div>
 
-            <div class="flex flex-col items-center relative group">
-               
+                <div class="flex flex-col items-center relative group">
 
-                 <img src="https://news.ucsc.edu/wp-content/uploads/2025/07/Dark-matter-origin-horizon.jpg"
-                     alt="History of the Universe"
-                     class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />     
-               
-            <p class="text-gray-400 text-base text-center max-w-lg">
-                The history of the universe from the <i>Big Bang</i> to today, illustrating the expansion of spacetime over billions of years due to dark energy.
-            </p>
 
-        </div>
-       </div>  
-    </section>
-<!-- section 4-->
-    <section class="mb-24 fade-section">
+                    <img src="https://news.ucsc.edu/wp-content/uploads/2025/07/Dark-matter-origin-horizon.jpg"
+                        alt="History of the Universe"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        The history of the universe from the <span class="symbol" data-desc-id="desc-big-bang"><i>Big
+                                Bang</i></span> to today, illustrating the expansion of spacetime over billions of years
+                        due to dark energy.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+        <!-- section 4-->
+        <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Spacetime & Matter <strong>(Spacetime without time)</strong>
             </h3>
             <p class="text-white-400 mb-6">
-                Matter is created when spacetime bends to an extreme. In this state, <i>the flow of time slows down almost to zero.</i> Matter can therefore be understood as spacetime without flowing time (Only Space; x,y and z) — <b>the still form of energy.</b>.
+                Matter is created when spacetime bends to an extreme. In this state, <i>the flow of time slows down
+                    almost to zero.</i> Matter can therefore be understood as spacetime without flowing time (Only
+                Space; x,y and z) — <b>the still form of energy.</b>.
             </p><br>
-<div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
-            <div class="flex flex-col items-center relative group">
-                <img src="https://i.extremetech.com/imagery/content-types/06xm9TS6pXwneMhnXaQGrDl/hero-image.fit_lim.size_1600x900.v1715953356.jpg"
-                     alt="Spacetime 3D Visualization"
-                     class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-               
-            <p class="text-gray-400 text-base text-center max-w-lg">
-                Matter the frozen form of energy, where time nearly stops due to extreme spacetime curvature.
-            </p>
-        </div>
-        <div>
-        
-            <p class="text-white-400 mb-6">
-                When a huge amount of energy is confined to a small region <i>(compressed within limited x, y, and z space)</i>, the time axis inside that region drops. The stronger the bending of time, the denser the matter becomes. Electrons, protons, neutrons, quarks, and other fundamental particles each represent <i>different stable patterns</i> of this extreme spacetime curvature.
-            </p>
-             
-            <p class="text-white-400 mb-6">
-                Every object in the universe holds energy, and <b>nature tends toward stability.</b> Matter, being a <i>reservoir</i> of immense energy locked in frozen time, constantly seeks to release it. This <i>imbalance</i> creates a mismatch of <b>timeflow</b> between matter and its surroundings. That mismatch is what we observe as <b>Gravity</b> — not a force of space, but the effect of differing time rates.
-            </p>
-            </div>
-    </div>
-    <p class="text-white-400 mb-6">
-               As timeflow becomes weaker and curvature sharper, matter grows denser. At extreme limits, where <i>time nearly stops</i>, black holes form. And when curvature <i>tends to infinity</i>, timeflow halts completely — producing the concept of a <b>singularity</b>.
-            </p>
-    </section> 
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 gap-bottom-5 fade-section">
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://i.extremetech.com/imagery/content-types/06xm9TS6pXwneMhnXaQGrDl/hero-image.fit_lim.size_1600x900.v1715953356.jpg"
+                        alt="Spacetime 3D Visualization"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
 
-    <section class="mb-24 fade-section">
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Matter the frozen form of energy, where time nearly stops due to extreme spacetime curvature.
+                    </p>
+                </div>
+                <div>
+
+                    <p class="text-white-400 mb-6">
+                        When a huge amount of energy is confined to a small region <i>(compressed within limited x, y,
+                            and z space)</i>, the time axis inside that region drops. The stronger the bending of time,
+                        the denser the matter becomes. Electrons, protons, neutrons, quarks, and other fundamental
+                        particles each represent <i>different stable patterns</i> of this extreme spacetime curvature.
+                    </p>
+
+                    <p class="text-white-400 mb-6">
+                        Every object in the universe holds energy, and <b>nature tends toward stability.</b> Matter,
+                        being a <i>reservoir</i> of immense energy locked in frozen time, constantly seeks to release
+                        it. This <i>imbalance</i> creates a mismatch of <b>timeflow</b> between matter and its
+                        surroundings. That mismatch is what we observe as <b>Gravity</b> — not a force of space, but the
+                        effect of differing time rates.
+                    </p>
+                </div>
+            </div>
+            <p class="text-white-400 mb-6">
+                As timeflow becomes weaker and curvature sharper, matter grows denser. At extreme limits, where <i>time
+                    nearly stops</i>, black holes form. And when curvature <i>tends to infinity</i>, timeflow halts
+                completely — producing the concept of a <span class="symbol"
+                    data-desc-id="desc-singularity"><b>singularity</b></span>.
+            </p>
+        </section>
+
+        <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Spacetime & Dark Energy <strong>(Spacetime with excessive time)</strong>
             </h3>
             <br>
-   <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
-        <div>
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+                <div>
+                    <p class="text-white-400 mb-6">
+                        <i>Dark energy</i> is the opposite state of matter in the language of spacetime and timeflow.
+                    </p>
+
+                    <p class="text-white-400 mb-6">In this view, <b>matter</b> is <i>spacetime with nearly frozen
+                            timeflow</i> — regions where the local rate of time is close to zero. Matter holds enormous
+                        energy in a still form.</p>
+
+                    <p class="text-white-400 mb-6">By contrast, <b>dark energy</b> is <i>spacetime where timeflow is
+                            extremely high</i>. These regions push spacetime outward — time races forward and carries
+                        space with it, producing accelerated expansion.</p>
+
+                </div>
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://bigthink.com/wp-content/uploads/2024/01/darken.jpg?lb=1536,864"
+                        alt="History of the Universe"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Percentage of dark energy in the universe over time, showing its increasing dominance in cosmic
+                        expansion.
+                    </p>
+                </div>
+            </div>
             <p class="text-white-400 mb-6">
-               <i>Dark energy</i> is the opposite state of matter in the language of spacetime and timeflow.</p>
+                Dark energy acts as a <i>repulsive energy</i> that pushes matter away from one another, opposing the
+                attractive nature of gravity. It stretches the fabric of spacetime, increasing the distance between
+                galaxies and accelerating the universe’s expansion. This mysterious form of energy does not behave like
+                matter, radiation, or any known force — it is a distinct and unique property of the universe itself,
+                influencing the large-scale structure and evolution of everything that exists.
+            </p>
+            <p>Relation between <b>timeflow</b> in matter and dark energy:</p>
+            <p>\[
+                T_{\text{matter}} \approx 0 \quad | \quad T_{\text{dark energy}} \gg 1
+                \]</p>
 
-            <p class="text-white-400 mb-6">In this view, <b>matter</b> is <i>spacetime with nearly frozen timeflow</i> — regions where the local rate of time is close to zero. Matter holds enormous energy in a still form.</p>
+            <p>Thus, the cosmic acceleration attributed to dark energy is not a separate substance but the natural
+                behaviour of spacetime itself — where <i>timeflow increases</i>, space expands faster; where <i>timeflow
+                    drops</i>, spacetime condenses into matter.</p>
 
-            <p class="text-white-400 mb-6">By contrast, <b>dark energy</b> is <i>spacetime where timeflow is extremely high</i>. These regions push spacetime outward — time races forward and carries space with it, producing accelerated expansion.</p>
+            <p>In short: <b>matter = frozen spacetime</b>, <b>dark energy = hyperactive spacetime</b>.</p>
+        </section>
 
-        </div>
-        <div class="flex flex-col items-center relative group">
-    <img src="https://bigthink.com/wp-content/uploads/2024/01/darken.jpg?lb=1536,864"
-         alt="History of the Universe"
-         class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-    <p class="text-gray-400 text-base text-center max-w-lg">
-        Percentage of dark energy in the universe over time, showing its increasing dominance in cosmic expansion.
-    </p>
-    </div>
-        </div>
-        <p class="text-white-400 mb-6">
-            Dark energy acts as a <i>repulsive energy</i> that pushes matter away from one another, opposing the attractive nature of gravity. It stretches the fabric of spacetime, increasing the distance between galaxies and accelerating the universe’s expansion. This mysterious form of energy does not behave like matter, radiation, or any known force — it is a distinct and unique property of the universe itself, influencing the large-scale structure and evolution of everything that exists.
-        </p>
-        <p>Relation between <b>timeflow</b> in matter and dark energy:</p>
-<p>\[
-T_{\text{matter}} \approx 0 \quad | \quad T_{\text{dark energy}} \gg 1
-\]</p>
-
-<p>Thus, the cosmic acceleration attributed to dark energy is not a separate substance but the natural behaviour of spacetime itself — where <i>timeflow increases</i>, space expands faster; where <i>timeflow drops</i>, spacetime condenses into matter.</p>
-
-<p>In short: <b>matter = frozen spacetime</b>, <b>dark energy = hyperactive spacetime</b>.</p>
-    </section>
-
-    <section class="mb-24 fade-section">
+        <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Time <strong>Flow</strong>
             </h3>
             <p class="text-white-400 mb-6">
-                Time is the dimension that keeps the <i>universe running</i>. It begins from 0 and can reach a maximum value, tmax, where tmax tends toward infinity. In the real universe of spacetime, <i>time cannot have any negative value.</i>
+                Time is the dimension that keeps the <i>universe running</i>. It begins from 0 and can reach a maximum
+                value, tmax, where tmax tends toward infinity. In the real universe of spacetime, <i>time cannot have
+                    any negative value.</i>
             </p><br><br>
-<div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section"> 
-            
-<div class="flex flex-col items-center relative group">
-    <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2020/09/universe-history.png?w=6667&h=3750&fit=clip&crop=faces%2Cfocalpoint"
-         alt="History of the Universe"
-         class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-    <p class="text-gray-400 text-base text-center max-w-lg">
-        Universe expansion due to timeflow and dark energy over billions of years.
-    </p>
-</div>
-<div>
-            <p class="text-white-400 mb-6">
-                However, time and timeflow are not the same. <b>Timeflow (T)</b> represents the change in time within the universe. The value of timeflow can be any real number — positive, negative, or zero (though negative timeflow has not been observed). Timeflow determines how quickly or slowly time progresses at any region of space.
-            </p>
-            <p class="text-white-400 mb-6">
-                Timeflow is directly related to the rate of expansion of the universe. When timeflow is zero, everything becomes still and no motion is possible. Timeflow becomes lower near regions of high density or massive objects, approaches zero near singularities and black holes, and becomes higher in interstellar voids where dark energy dominates.
-            </p>
+            <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2020/09/universe-history.png?w=6667&h=3750&fit=clip&crop=faces%2Cfocalpoint"
+                        alt="History of the Universe"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Universe expansion due to timeflow and dark energy over billions of years.
+                    </p>
+                </div>
+                <div>
+                    <p class="text-white-400 mb-6">
+                        However, time and timeflow are not the same. <b>Timeflow (T)</b> represents the change in time
+                        within the universe. The value of timeflow can be any real number — positive, negative, or zero
+                        (though negative timeflow has not been observed). Timeflow determines how quickly or slowly time
+                        progresses at any region of space.
+                    </p>
+                    <p class="text-white-400 mb-6">
+                        Timeflow is directly related to the rate of expansion of the universe. When timeflow is zero,
+                        everything becomes still and no motion is possible. Timeflow becomes lower near regions of high
+                        density or massive objects, approaches zero near singularities and black holes, and becomes
+                        higher in interstellar voids where dark energy dominates.
+                    </p>
+                </div>
             </div>
-            </div> 
             <p>Relation between <b>proper time</b> (\(\tau\)) and <b>universal time</b> (\(t\)):</p>
             <p>\[
-            \frac{d\tau}{dt} = T(\mathbf{x}, t)
-            \]</p>
+                \frac{d\tau}{dt} = T(\mathbf{x}, t)
+                \]</p>
 
             <p class="text-white-400 mb-6">
-                The net timeflow of the universe is positive and greater than that experienced on Earth — this is why the universe continues to expand. Within our solar system, the average timeflow is around 1 second per 1 second, where one second is defined as <i>9,192,631,770 cycles of the microwave radiation released during a specific electron transition in a cesium-133 atom.</i>
+                The net timeflow of the universe is positive and greater than that experienced on Earth — this is why
+                the universe continues to expand. Within our solar system, the average timeflow is around 1 second per 1
+                second, where one second is defined as <i>9,192,631,770 cycles of the microwave radiation released
+                    during a specific electron transition in a cesium-133 atom.</i>
             </p>
             <p class="text-white-400 mb-6">
-                Every form of matter, from atoms to subatomic particles, contains time and timeflow values that are close to zero. This is why matter remains stable and motionless within itself, even as the rest of the universe continues to expand.
+                Every form of matter, from atoms to subatomic particles, contains time and timeflow values that are
+                close to zero. This is why matter remains stable and motionless within itself, even as the rest of the
+                universe continues to expand.
             </p>
+        </section>
+
+        <section class="mb-24 fade-section">
+            <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
+                Time Dilatation
+            </h3>
+            <p><b>Equation:</b></p>
+
+            <div class="equation-bar fade-section">
+                <div class="equation" aria-hidden="false">
+                    <div class="eq-tex">
+                        \[
+                        \displaystyle \frac{d\tau}{dt} \;=\; T(\mathbf{x},t)
+                        \]
+                    </div>
+                </div>
+
+                <!-- RIGHT: symbols only (descriptions stored elsewhere or inline via data-tooltip-text) -->
+                <ul class="quantities" aria-label="Equation quantities">
+                    <li><span class="symbol" data-desc-id="desc-tau">τ = Proper time</span></li>
+                    <li><span class="symbol" data-desc-id="desc-t">t = Universal time</span></li>
+                    <li><span class="symbol" data-desc-id="desc-T">T(x,t) = Timeflow</span></li>
+                </ul>
+            </div>
+
+
+            <p><b>Universal time</b> (<i>t</i>) is the average time throughout the universe.
+
+                It is always increasing. In a small interval, <i>t′ = t + h</i> where <i>h ≪ t</i>.
+                Hence, for practical reasoning, <i>t</i> can be considered almost constant as <i>t′</i> tends to
+                <i>t</i>.</p>
+
+            <div class="equation-bar fade-section">
+                <div class="equation" aria-hidden="false">
+                    <div class="eq-tex">
+                        \[
+                        v = \frac{s}{t}
+                        \]
+                    </div>
+                </div>
+
+                <ul class="quantities" aria-label="Equation quantities">
+                    <li><span class="symbol" data-desc-id="desc-velocity">v = Velocity</span></li>
+                    <li><span class="symbol" data-desc-id="desc-distance">s = Distance</span></li>
+                    <li><span class="symbol" data-desc-id="desc-t">t = Universal time</span></li>
+                </ul>
+
+
+                <p>and since <i>t</i> and <i>τ</i> are connected through timeflow (<i>T</i>):</p>
+                <div class="equation" aria-hidden="false">
+                    <div class="eq-tex">
+                        \[
+                        v = \frac{sT}{\tau}
+                        \]
+                    </div>
+                </div>
+</div>
+<div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+<div>
+                <h3 class="text-lg font-semibold mt-6 mb-2">Relative Case</h3>
+                <p>If <i>τ</i> is constant, then <br><p class="text-center"><b>t ∝ 1/T</b></p><br>
+                    This means that in regions with higher <b>T</b>,
+                    time will appear to move slower to the observer — because we experience time as <i>t</i>.
+                    This is the <b>relative</b> perception of time.</p>
+</div>
+<div>
+                <h3 class="text-lg font-semibold mt-6 mb-2">Real Case</h3>
+                <p>If <i>t</i> is constant, then <p class="text-center"><b>τ ∝ T</b></p><br>
+                    In regions with higher <b>T</b>, the proper time (<i>τ</i>) will increase more quickly
+                    than universal time (<i>t</i>).
+                    So, in a small span of universal time, a much greater amount of local time will pass.
+                    This is the <span class="symbol" data-desc-id="desc-absolute"><b>absolute</b></span> interpretation — the true nature of time dilation in your model.</p>
+</div>    </div>
         </section>
         <!-- Feature 2: Scroll-Driven Data Storytelling -->
         <section class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
             <div>
                 <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Blackholes</h3>
-              
-                
-                    <p>
-                        Black holes are the ultimate form of <i>frozen spacetime</i> — regions where the <b>timeflow</b> (\(T\)) becomes almost zero. Inside and near a black hole, time slows drastically due to extreme curvature. Matter is so dense that spacetime folds into itself, cutting off the normal flow of time.</p>
 
-                    <p>
-                        At the event horizon, the timeflow for an external observer effectively stops:</p>
-                    <p>\[
-                            T_{\text{black hole}} \to 0
-                        \]</p>
 
-<p>Within the black hole, time no longer progresses — it reaches a state where spacetime becomes nearly static. In this condition, all motion and change cease, and matter remains locked in a timeless state. Black holes are therefore <i>points of complete spacetime collapse</i>, where the <b>universal time</b> (\(t\)) still exists, but the <b>local timeflow</b> (\(T\)) does not.</p>
-<br><br><br>
-<div class="flex flex-col items-center relative group">
-    <img src="https://www.universetoday.com/article_images/bh_visualization_20250820_193402.jpg"
-         alt="History of the Universe"
-         class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-    <p class="text-gray-400 text-base text-center max-w-lg">
-        Black hole
-    </p>
-</div>
-                   
-                
+                <p>
+                    Black holes are the ultimate form of <i>frozen spacetime</i> — regions where the <b>timeflow</b>
+                    (\(T\)) becomes almost zero. Inside and near a black hole, time slows drastically due to extreme
+                    curvature. Matter is so dense that spacetime folds into itself, cutting off the normal flow of time.
+                </p>
+
+                <p>
+                    At the event horizon, the timeflow for an external observer effectively stops:</p>
+                <p>\[
+                    T_{\text{black hole}} \to 0
+                    \]</p>
+
+                <p>Within the black hole, time no longer progresses — it reaches a state where spacetime becomes nearly
+                    static. In this condition, all motion and change cease, and matter remains locked in a timeless
+                    state. Black holes are therefore <i>points of complete spacetime collapse</i>, where the
+                    <b>universal time</b> (\(t\)) still exists, but the <b>local timeflow</b> (\(T\)) does not.</p>
+                <br><br><br>
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://www.universetoday.com/article_images/bh_visualization_20250820_193402.jpg"
+                        alt="History of the Universe"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Black hole
+                    </p>
+                </div>
+
+
             </div>
-            
+
             <div>
-                 <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Interstellar Voids</h3>
-                <p>In contrast, interstellar voids represent the opposite extreme — vast regions of spacetime with <i>very high timeflow</i> and <i>very low density</i>.</p>
+                <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Interstellar Voids</h3>
+                <p>In contrast, interstellar voids represent the opposite extreme — vast regions of spacetime with
+                    <i>very high timeflow</i> and <i>very low density</i>.</p>
 
-<p>Here, the curvature of spacetime is minimal, allowing time to move faster than average:</p>
-<p>\[
-T_{\text{void}} \gg 1
-\]</p>
+                <p>Here, the curvature of spacetime is minimal, allowing time to move faster than average:</p>
+                <p>\[
+                    T_{\text{void}} \gg 1
+                    \]</p>
 
-<p>These regions are dominated by <b>dark energy</b>. Since the timeflow is extremely high, spacetime stretches outward rapidly, driving the universe’s expansion. Voids represent <i>hyperactive spacetime</i>, while black holes represent <i>frozen spacetime</i>. The contrast between them keeps the universe balanced — one side contracting, the other expanding — maintaining the cosmic equilibrium.</p>
-<br>
-<div class="flex flex-col items-center relative group">
-    <img src="https://media.moddb.com/cache/images/games/1/56/55401/thumb_620x2000/5777652096_81738f0a53_o.jpg"
-         alt="History of the Universe"
-         class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
-    <p class="text-gray-400 text-base text-center max-w-lg">
-        Intersteller voids
-    </p>
-</div>
+                <p>These regions are dominated by <b>dark energy</b>. Since the timeflow is extremely high, spacetime
+                    stretches outward rapidly, driving the universe’s expansion. Voids represent <i>hyperactive
+                        spacetime</i>, while black holes represent <i>frozen spacetime</i>. The contrast between them
+                    keeps the universe balanced — one side contracting, the other expanding — maintaining the cosmic
+                    equilibrium.</p>
+                <br>
+                <div class="flex flex-col items-center relative group">
+                    <img src="https://media.moddb.com/cache/images/games/1/56/55401/thumb_620x2000/5777652096_81738f0a53_o.jpg"
+                        alt="History of the Universe"
+                        class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                    <p class="text-gray-400 text-base text-center max-w-lg">
+                        Intersteller voids
+                    </p>
+                </div>
             </div>
         </section>
         <section class="mb-24 fade-section">
@@ -603,16 +962,22 @@ T_{\text{void}} \gg 1
                 Some unclear concepts (not completely and properly understood yet)
             </h3>
             <p class="text-white-400 mb-6">
-            <b >1.</b>
-                "The universe itself expands because the time axis expands. Space (x, y, z) follows this growth, but matter does not expand, because its internal time is nearly zero. Thus, matter exists as frozen spacetime within the flowing sea of expanding spacetime."
+                <b>1.</b>
+                "The universe itself expands because the time axis expands. Space (x, y, z) follows this growth, but
+                matter does not expand, because its internal time is nearly zero. Thus, matter exists as frozen
+                spacetime within the flowing sea of expanding spacetime."
             </p>
             <p class="text-white-400 mb-6">
-                <b >2.</b>
-                Additionally, the expansion of the universe affects the wavelength of light traveling through spacetime. As spacetime stretches, the wavelength of light also stretches, leading to a phenomenon known as redshift. This effect is commonly observed in distant galaxies, where the light they emit appears shifted towards the red end of the spectrum due to the expansion of spacetime over vast distances.
+                <b>2.</b>
+                Additionally, the expansion of the universe affects the wavelength of light traveling through spacetime.
+                As spacetime stretches, the wavelength of light also stretches, leading to a phenomenon known as
+                redshift. This effect is commonly observed in distant galaxies, where the light they emit appears
+                shifted towards the red end of the spectrum due to the expansion of spacetime over vast distances.
             </p>
-             <p class="text-white-400 mb-6">
-                <b >3.</b>
-               Universe is a <b>disymmetrical system</b> where two completely opposite quantities affect each other to keep the universe in motion.
+            <p class="text-white-400 mb-6">
+                <b>3.</b>
+                Universe is a <span class="symbol" data-desc-id="desc-disymmetrical"><b>Disymmetrical system</b></span> where two completely opposite quantities affect each other to
+                keep the universe in motion.
             </p>
         </section>
 
@@ -625,74 +990,104 @@ T_{\text{void}} \gg 1
             </p><br>
             <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
 
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; max-height: 500px; border-radius: 12px; margin-bottom: 24px;">
-  <iframe 
-    src="https://www.youtube.com/embed/YNqTamaKMC8" 
-    title="What if we could see Spacetime? An immersive experience" 
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-  </iframe>
-</div>
-<p class="text-center text-gray-500 py-8 border-t border-gray-700"> “What if we could see Spacetime? An immersive experience”</p>
+                <div
+                    style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; max-height: 500px; border-radius: 12px; margin-bottom: 24px;">
+                    <iframe src="https://www.youtube.com/embed/YNqTamaKMC8"
+                        title="What if we could see Spacetime? An immersive experience" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    </iframe>
+                </div>
+                <p class="text-center text-gray-500 py-8 border-t border-gray-700"> “What if we could see Spacetime? An
+                    immersive experience”</p>
 
-<!-- Video 2: I never understood why matter curves spacetime… -->
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;">
-  <iframe 
-    src="https://www.youtube.com/embed/qKZvAwcXceE" 
-    title="YouTube video player" 
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-  </iframe>
-</div>
+                <!-- Video 2: I never understood why matter curves spacetime… -->
+                <div
+                    style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;">
+                    <iframe src="https://www.youtube.com/embed/qKZvAwcXceE" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    </iframe>
+                </div>
 
-<p class="text-center text-gray-500 py-8 border-t border-gray-700"> “I never understood why matter curves spacetime… until now!”</p>
-</div>
+                <p class="text-center text-gray-500 py-8 border-t border-gray-700"> “I never understood why matter
+                    curves spacetime… until now!”</p>
+            </div>
         </section>
 
-    <footer class="text-center text-gray-500 py-8 border-t border-gray-700">
-        Website designed and developed by <a href="mailto:88arnob88@gmail.com" class="text-blue-400 hover:underline font-medium">
-      Deb Arnob Barai
-    </a>.<br>
-        Every thing that is mentioned here is my own way of defining spacetime and may contain some information which are different from the conventional understanding. <i>Its new, its logical and it is absolute.</i><br>
-        &copy; 2025 Spacetime Exploration. All rights reserved.
-    </footer>
-    <footer class="text-gray-500 py-8 ">
-    version 1.0.3
-    </footer>
-    <button id="musicToggle" class="
+        <footer class="text-center text-gray-500 py-8 border-t border-gray-700">
+            Website designed and developed by <a href="mailto:88arnob88@gmail.com"
+                class="text-blue-400 hover:underline font-medium">
+                Deb Arnob Barai
+            </a>.<br>
+            Every thing that is mentioned here is my own way of defining spacetime and may contain some information
+            which are different from the conventional understanding. <i>Its new, its logical and it is absolute.</i><br>
+            &copy; 2025 Spacetime Exploration. All rights reserved.
+        </footer>
+        <footer class="text-gray-500 py-8 ">
+            version 1.0.4
+            [Time Dilatation]
+        </footer>
+        <button id="musicToggle" class="
         fixed bottom-4 right-4 z-50 p-4 rounded-full 
         bg-purple-700 hover:bg-purple-600 text-white 
         shadow-2xl shadow-purple-900/80 transition duration-300 
-        transform hover:scale-110 active:scale-90 opacity-0 pointer-events-none"
-        aria-label="Toggle Background Music"> 
-        <!-- Icon will be inserted by Lucide/JavaScript -->
-        <i data-lucide="volume-2" class="w-6 h-6"></i>
-    </button>
-</main>
+        transform hover:scale-110 active:scale-90 opacity-0 pointer-events-none" aria-label="Toggle Background Music">
+            <!-- Icon will be inserted by Lucide/JavaScript -->
+            <i data-lucide="volume-2" class="w-6 h-6"></i>
+        </button>
+    </main>
 
     <!-- fullscreen image modal -->
-<div id="fullscreen-img-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(20,16,36,0.97); z-index:999999; align-items:center; justify-content:center;">
-    <button id="close-fullscreen-img" style="position:absolute; top:2rem; right:2rem; background:#a78bfa; color:#fff; font-size:1.5rem; border:none; border-radius:1.5rem; padding:0.5rem 1.5rem; cursor:pointer; box-shadow:0 0 12px #a78bfa; z-index:1000000;">
-        ✕ 
-    </button>
-    <button id="zoom-in-img" style="position:absolute; bottom:2rem; left:2rem; background:#34d399; color:#fff; font-size:2rem; border:none; border-radius:1.5rem; padding:0.5rem 1.5rem; cursor:pointer; box-shadow:0 0 12px #34d399; z-index:1000000;">
-        +
-    </button>
-    <button id="zoom-out-img" style="position:absolute; bottom:2rem; left:7rem; background:#38bdf8; color:#fff; font-size:2rem; border:none; border-radius:1.5rem; padding:0.5rem 1.5rem; cursor:pointer; box-shadow:0 0 12px #38bdf8; z-index:1000000;">
-        –
-    </button>
-    <img id="fullscreen-img" src="" alt="Fullscreen" style="max-width:98vw; max-height:95vh; border-radius:1rem; box-shadow:0 0 40px #38bdf8; transition: transform 0.3s cubic-bezier(.4,0,.2,1); background:#18181b;" />
-</div>
-  
-<audio id="backgroundAudio" src="soundtrack for Html (edited).mp3" preload="auto" loop muted></audio>
+    <div id="fullscreen-img-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(20,16,36,0.97); z-index:999999; align-items:center; justify-content:center;">
+        <button id="close-fullscreen-img"
+            style="position:absolute; top:2rem; right:2rem; background:#a78bfa; color:#fff; font-size:1.5rem; border:none; border-radius:1.5rem; padding:0.5rem 1.5rem; cursor:pointer; box-shadow:0 0 12px #a78bfa; z-index:1000000;">
+            ✕
+        </button>
+        <button id="zoom-in-img"
+            style="position:absolute; bottom:2rem; left:2rem; background:#34d399; color:#fff; font-size:2rem; border:none; border-radius:1.5rem; padding:0.5rem 1.5rem; cursor:pointer; box-shadow:0 0 12px #34d399; z-index:1000000;">
+            +
+        </button>
+        <button id="zoom-out-img"
+            style="position:absolute; bottom:2rem; left:7rem; background:#38bdf8; color:#fff; font-size:2rem; border:none; border-radius:1.5rem; padding:0.5rem 1.5rem; cursor:pointer; box-shadow:0 0 12px #38bdf8; z-index:1000000;">
+            –
+        </button>
+        <img id="fullscreen-img" src="" alt="Fullscreen"
+            style="max-width:98vw; max-height:95vh; border-radius:1rem; box-shadow:0 0 40px #38bdf8; transition: transform 0.3s cubic-bezier(.4,0,.2,1); background:#18181b;" />
+    </div>
 
+    <audio id="backgroundAudio" src="soundtrack for Html (edited).mp3" preload="auto" loop muted></audio>
+
+    <!-- descriptions for tooltop -->
+    <div id="quantity-descriptions" style="display:none;">
+        <div id="desc-tau">Local time of a place.</div>
+        <div id="desc-t">Average/global time for the universe.(Constant) [The total age of the universe= 14B
+            years(approx)]</div>
+        <div id="desc-T">Local rate of change in proper time relative to universal time (varies with position and
+            epoch).</div>
+        <div id="desc-foundation">Every space and object in universe is spacetime.</div>
+        <div id="desc-structural-part">The tangible and interactable part of spacetime.</div>
+        <div id="desc-gravity">Gravity is the fundamental force of attraction between any two objects that have mass or
+            energy</div>
+        <div id="desc-kinetic-energy">Energy possessed by an object due to its motion.</div>
+        <div id="desc-nuclear-energy">Energy stored in the nucleus of an atom, released during nuclear reactions.</div>
+        <div id="desc-cosmic-radiation">Cosmic radiation is a stream of high-energy, charged particles, primarily
+            protons and atomic nuclei, that originate from space.</div>
+        <div id="desc-dark-energy">A mysterious form of energy that permeates all of space and tends to accelerate the
+            expansion of the universe. Totally opposite quantity of gravity</div>
+        <div id="desc-big-bang">The prevailing cosmological model explaining the origin of the universe from a
+            singularity approximately 13.8 billion years ago.</div>
+        <div id="desc-singularity">A point in spacetime where density becomes infinite, such as the center of a black
+            hole. (but these two events are not the same)</div>
+        <div id="desc-velocity">The speed of an object in a specific direction.</div>
+        <div id="desc-distance">The total length of the path traveled by an object.</div>
+        <div id="desc-absolute">Everything in this universe is absolute.</div>
+        <div id="desc-disymmetrical">???</div>
+    </div>
     <script>
-    // Audio autoplay handling
-  document.addEventListener('DOMContentLoaded', (event) => {
+        // Audio autoplay handling
+        document.addEventListener('DOMContentLoaded', (event) => {
             const startLink = document.getElementById('startLink');
             const audio = document.getElementById('backgroundAudio');
             const musicToggle = document.getElementById('musicToggle');
@@ -705,9 +1100,9 @@ T_{\text{void}} \gg 1
 
             function fadeInVolume(audioElement, finalVolume, duration) {
                 // Ensure volume is at zero before starting the fade
-                audioElement.volume = 0; 
-                const steps = 60; 
-                const intervalTime = duration / steps; 
+                audioElement.volume = 0;
+                const steps = 60;
+                const intervalTime = duration / steps;
                 const volumeStep = finalVolume / steps;
 
                 const fadeInterval = setInterval(() => {
@@ -723,19 +1118,19 @@ T_{\text{void}} \gg 1
             // --- INITIAL CLICK HANDLER ---
 
             if (startLink && audio && musicToggle) {
-                startLink.addEventListener('click', function(e) {
-                    
+                startLink.addEventListener('click', function (e) {
+
                     // 1. User Gesture: Play and Unmute
-                    audio.muted = false; 
+                    audio.muted = false;
                     audio.play()
                         .then(() => {
                             // 2. Start the smooth volume fade-in
                             fadeInVolume(audio, targetVolume, fadeDuration);
-                            
+
                             // 3. Show the toggle button immediately after starting
                             musicToggle.classList.remove('opacity-0', 'pointer-events-none');
                             musicToggle.classList.add('opacity-100');
-                            
+
                             // 4. Update the toggle icon to 'Pause' since it is now playing
                             updateToggleIcon('playing');
 
@@ -757,8 +1152,8 @@ T_{\text{void}} \gg 1
 
             function updateToggleIcon(state) {
                 // Clear old icon/content
-                toggleIconContainer.innerHTML = ''; 
-                
+                toggleIconContainer.innerHTML = '';
+
                 // Create new icon element
                 const icon = document.createElement('i');
                 icon.classList.add('w-6', 'h-6');
@@ -769,9 +1164,9 @@ T_{\text{void}} \gg 1
                     icon.setAttribute('data-lucide', 'volume-x'); // Speaker with mute sign
                 }
                 toggleIconContainer.appendChild(icon);
-                
+
                 // Rerender Lucide icons
-                lucide.createIcons(); 
+                lucide.createIcons();
             }
 
             musicToggle.addEventListener('click', () => {
@@ -853,7 +1248,7 @@ T_{\text{void}} \gg 1
 
             // Smooth scroll for Begin Exploration button
             const btn = document.querySelector('a[href="#main-content"]');
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
             });
@@ -884,100 +1279,185 @@ T_{\text{void}} \gg 1
             revealSections();
 
             // Remove gradient hover JS
-    function addGradientHover(id) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.addEventListener('mouseenter', () => {
-            el.classList.add('hover-gradient');
-        });
-        el.addEventListener('mouseleave', () => {
-            el.classList.remove('hover-gradient');
-        });
-    }
-    addGradientHover('inline-title');
-    addGradientHover('fixed-title');
+            function addGradientHover(id) {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('mouseenter', () => {
+                    el.classList.add('hover-gradient');
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.classList.remove('hover-gradient');
+                });
+            }
+            addGradientHover('inline-title');
+            addGradientHover('fixed-title');
 
-    // --- FULLSCREEN IMAGE VIEWER LOGIC ---
-    const fullscreenImgModal = document.getElementById('fullscreen-img-modal');
-    const fullscreenImg = document.getElementById('fullscreen-img');
-    const closeFullscreenImgBtn = document.getElementById('close-fullscreen-img');
-    const zoomInImgBtn = document.getElementById('zoom-in-img');
-    const zoomOutImgBtn = document.getElementById('zoom-out-img');
+            // --- FULLSCREEN IMAGE VIEWER LOGIC ---
+            const fullscreenImgModal = document.getElementById('fullscreen-img-modal');
+            const fullscreenImg = document.getElementById('fullscreen-img');
+            const closeFullscreenImgBtn = document.getElementById('close-fullscreen-img');
+            const zoomInImgBtn = document.getElementById('zoom-in-img');
+            const zoomOutImgBtn = document.getElementById('zoom-out-img');
 
-    let currentScale = 1;
-    const scaleStep = 0.1;
+            let currentScale = 1;
+            const scaleStep = 0.1;
 
-    // Function to open the fullscreen image modal
-    function openFullscreenImg(src) {
-        fullscreenImg.src = src;
-        fullscreenImgModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
-    }
+            // Function to open the fullscreen image modal
+            function openFullscreenImg(src) {
+                fullscreenImg.src = src;
+                fullscreenImgModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+            }
 
-    // Event listener to close the modal
-    closeFullscreenImgBtn.addEventListener('click', () => {
-        fullscreenImgModal.style.display = 'none';
-        document.body.style.overflow = ''; // Re-enable background scroll
-    });
+            // Event listener to close the modal
+            closeFullscreenImgBtn.addEventListener('click', () => {
+                fullscreenImgModal.style.display = 'none';
+                document.body.style.overflow = ''; // Re-enable background scroll
+            });
 
-    // Close modal on clicking outside the image
-    fullscreenImgModal.addEventListener('click', (e) => {
-        if (e.target === fullscreenImgModal) {
-            fullscreenImgModal.style.display = 'none';
-            document.body.style.overflow = ''; // Re-enable background scroll
-        }
-    });
+            // Close modal on clicking outside the image
+            fullscreenImgModal.addEventListener('click', (e) => {
+                if (e.target === fullscreenImgModal) {
+                    fullscreenImgModal.style.display = 'none';
+                    document.body.style.overflow = ''; // Re-enable background scroll
+                }
+            });
 
-    // Zoom in and out functionality
-    zoomInImgBtn.addEventListener('click', () => {
-        currentScale += scaleStep;
-        fullscreenImg.style.transform = `scale(${currentScale})`;
-    });
+            // Zoom in and out functionality
+            zoomInImgBtn.addEventListener('click', () => {
+                currentScale += scaleStep;
+                fullscreenImg.style.transform = `scale(${currentScale})`;
+            });
 
-    zoomOutImgBtn.addEventListener('click', () => {
-        currentScale = Math.max(1, currentScale - scaleStep);
-        fullscreenImg.style.transform = `scale(${currentScale})`;
-    });
+            zoomOutImgBtn.addEventListener('click', () => {
+                currentScale = Math.max(1, currentScale - scaleStep);
+                fullscreenImg.style.transform = `scale(${currentScale})`;
+            });
 
-    // Attach open function to all images in the main content
-    document.querySelectorAll('#main-content img').forEach(img => {
-        img.addEventListener('click', () => {
-            const src = img.src.replace(/thumb\/\d+x\d+\//, ''); // Remove thumbnail size part
-            openFullscreenImg(src);
-        });
-    });
+            // Attach open function to all images in the main content
+            document.querySelectorAll('#main-content img').forEach(img => {
+                img.addEventListener('click', () => {
+                    const src = img.src.replace(/thumb\/\d+x\d+\//, ''); // Remove thumbnail size part
+                    openFullscreenImg(src);
+                });
+            });
         });
         // Add this inside your DOMContentLoaded function
-const realitySpan = document.querySelector('.text-purple-300');
-const h2 = realitySpan.closest('h2');
-let realityTimeout = null;
+        const realitySpan = document.querySelector('.text-purple-300');
+        const h2 = realitySpan.closest('h2');
+        let realityTimeout = null;
 
-// Helper for smooth fade animation (restores transition after innerHTML change)
-function fadeText(element, newHTML, duration = 800) {
-    element.style.transition = `opacity ${duration}ms cubic-bezier(.4,0,.2,1)`;
-    element.style.opacity = 0;
-    setTimeout(() => {
-        element.innerHTML = newHTML;
-        // Force reflow to ensure transition applies after innerHTML change
-        void element.offsetWidth;
-        element.style.transition = `opacity ${duration}ms cubic-bezier(.4,0,.2,1)`;
-        element.style.opacity = 1;
-    }, duration);
-}
+        // Helper for smooth fade animation (restores transition after innerHTML change)
+        function fadeText(element, newHTML, duration = 800) {
+            element.style.transition = `opacity ${duration}ms cubic-bezier(.4,0,.2,1)`;
+            element.style.opacity = 0;
+            setTimeout(() => {
+                element.innerHTML = newHTML;
+                // Force reflow to ensure transition applies after innerHTML change
+                void element.offsetWidth;
+                element.style.transition = `opacity ${duration}ms cubic-bezier(.4,0,.2,1)`;
+                element.style.opacity = 1;
+            }, duration);
+        }
 
-realitySpan.addEventListener('mouseenter', () => {
-    realityTimeout = setTimeout(() => {
-        fadeText(h2, '<span class="inter text-white-400">Spacetime is the Universe</span>');
-    }, 10000); // 10 seconds
-});
+        realitySpan.addEventListener('mouseenter', () => {
+            realityTimeout = setTimeout(() => {
+                fadeText(h2, '<span class="inter text-white-400">Spacetime is the Universe</span>');
+            }, 10000); // 10 seconds
+        });
 
-realitySpan.addEventListener('mouseleave', () => {
-    clearTimeout(realityTimeout);
-    // Only fade back if not already normal
-    if (!h2.innerHTML.includes('Grasp')) {
-        fadeText(h2, `Grasp the <span class="text-purple-300">Fabric of Reality</span>`);
-    }
-});
+        realitySpan.addEventListener('mouseleave', () => {
+            clearTimeout(realityTimeout);
+            // Only fade back if not already normal
+            if (!h2.innerHTML.includes('Grasp')) {
+                fadeText(h2, `Grasp the <span class="text-purple-300">Fabric of Reality</span>`);
+            }
+        });
+        /* Floating tooltip — now general purpose:
+           - Any element with data-tooltip-text="..." shows that text.
+           - Any element with data-desc-id="some-id" will use the content of the element with that id.
+           - Works for inline words (not only li). */
+        document.addEventListener('DOMContentLoaded', () => {
+            // create tooltip node once
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip-floating';
+            tooltip.innerHTML = '<div class="title"></div><div class="body"></div>';
+            document.body.appendChild(tooltip);
+
+            // selector for the elements that should show tooltips
+            const selector = '[data-tooltip-text], [data-desc-id], [data-tooltip]';
+            const tipElements = document.querySelectorAll(selector);
+
+            function getTooltipText(el) {
+                // priority: explicit text attribute -> desc-id lookup -> fallback to element title/aria-label
+                const txt = el.getAttribute('data-tooltip-text');
+                if (txt) return txt;
+                const descId = el.getAttribute('data-desc-id');
+                if (descId) {
+                    const src = document.getElementById(descId);
+                    if (src) return src.textContent.trim();
+                }
+                const direct = el.getAttribute('data-tooltip');
+                if (direct) return direct;
+                return el.getAttribute('title') || el.getAttribute('aria-label') || '';
+            }
+
+            function positionTooltip(e) {
+                const rect = tooltip.getBoundingClientRect();
+                const mouseX = (e.clientX || (e.touches && e.touches[0].clientX)) || (window.innerWidth / 2);
+                const mouseY = (e.clientY || (e.touches && e.touches[0].clientY)) || (window.innerHeight / 2);
+                const pad = 12;
+
+                let left = mouseX + pad;
+                let top = mouseY + pad;
+
+                if (left + rect.width > window.innerWidth - 12) left = mouseX - rect.width - pad;
+                if (top + rect.height > window.innerHeight - 12) top = mouseY - rect.height - pad;
+                left = Math.max(8, left);
+                top = Math.max(8, top);
+
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = top + 'px';
+            }
+
+            tipElements.forEach(el => {
+                // show on enter
+                el.addEventListener('mouseenter', (e) => {
+                    const txt = getTooltipText(el);
+                    if (!txt) return;
+                    tooltip.querySelector('.title').textContent = el.textContent.trim(); // small title = the word
+                    tooltip.querySelector('.body').textContent = txt;
+                    tooltip.classList.add('visible');
+                    positionTooltip(e);
+                });
+                // follow cursor
+                el.addEventListener('mousemove', (e) => positionTooltip(e));
+                // hide on leave
+                el.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+
+                // touch fallback: tap toggles tooltip
+                el.addEventListener('click', (e) => {
+                    if (window.innerWidth < 900) {
+                        e.preventDefault();
+                        const visible = tooltip.classList.contains('visible');
+                        if (visible) tooltip.classList.remove('visible');
+                        else {
+                            const txt = getTooltipText(el);
+                            if (!txt) return;
+                            tooltip.querySelector('.title').textContent = el.textContent.trim();
+                            tooltip.querySelector('.body').textContent = txt;
+                            tooltip.classList.add('visible');
+                            positionTooltip(e);
+                        }
+                    }
+                });
+            });
+
+            // hide on scroll/resize
+            window.addEventListener('scroll', () => tooltip.classList.remove('visible'), { passive: true });
+            window.addEventListener('resize', () => tooltip.classList.remove('visible'));
+        });
     </script>
 </body>
+
 </html>
