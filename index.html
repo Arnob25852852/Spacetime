@@ -364,6 +364,18 @@
         }
 
         /* Equation bar for clear display */
+        /* MathJax and TeX rendering: use the site fonts for equations */
+        .MathJax, .mjx-chtml, .math-display, .eq-tex {
+            font-family: 'Inter', 'Poppins', sans-serif !important;
+            color: #e6eefb;
+        }
+        .math-display {
+            display: block;
+            text-align: center;
+            width: 100%;
+            margin: 0.75rem 0;
+        }
+
         .equation-bar {
             display: flex;
             flex-wrap: wrap;
@@ -456,35 +468,72 @@
         .tooltip-floating {
             position: fixed;
             z-index: 1000000;
-            background: rgba(8, 10, 20, 0.96);
+            background: linear-gradient(180deg, rgba(8,9,20,0.9), rgba(12,10,24,0.82));
             color: #e6eefb;
-            padding: 10px 14px;
-            border-radius: 10px;
-            box-shadow: 0 8px 40px rgba(2, 6, 23, 0.75);
-            max-width: 340px;
-            font-size: 0.95rem;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(167,139,250,0.12);
+            box-shadow: 0 10px 40px rgba(2, 6, 23, 0.9), 0 6px 18px rgba(124,58,237,0.06), inset 0 1px 0 rgba(255,255,255,0.02);
+            backdrop-filter: blur(8px) saturate(1.05);
+            -webkit-backdrop-filter: blur(8px) saturate(1.05);
+            max-width: 380px;
+            font-size: 0.96rem;
             pointer-events: none;
             opacity: 0;
-            transform: translateY(6px) scale(0.985);
-            transition: opacity 280ms cubic-bezier(.4, 0, .2, 1), transform 280ms cubic-bezier(.4, 0, .2, 1);
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 220ms cubic-bezier(.4, 0, .2, 1), transform 240ms cubic-bezier(.4, 0, .2, 1), box-shadow 300ms ease;
             line-height: 1.4;
         }
 
         .tooltip-floating.visible {
             opacity: 1;
             transform: translateY(0) scale(1);
+            box-shadow: 0 18px 60px rgba(2, 6, 23, 0.98), 0 10px 30px rgba(124,58,237,0.12), inset 0 1px 0 rgba(255,255,255,0.02);
+        }
+
+        .tooltip-floating::after {
+            /* small pointer */
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent transparent rgba(18,15,32,0.95) transparent;
+            filter: drop-shadow(0 -2px 3px rgba(0,0,0,0.45));
         }
 
         .tooltip-floating .title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-weight: 700;
             color: #fbbf24;
             margin-bottom: 6px;
             letter-spacing: 0.01em;
+            font-family: 'Poppins', Inter, sans-serif;
+        }
+
+        .tooltip-floating .title .title-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            background: linear-gradient(90deg, rgba(167,139,250,0.12), rgba(56,189,248,0.06));
+            color: #e9d5ff;
+            box-shadow: 0 4px 12px rgba(124,58,237,0.06), inset 0 -1px 0 rgba(255,255,255,0.02);
+            font-weight: 700;
+            font-size: 0.85rem;
         }
 
         .tooltip-floating .body {
             color: #dbeafe;
-            font-size: 0.93rem;
+            font-size: 0.95rem;
+            max-height: 170px;
+            overflow: auto;
+            padding-right: 6px;
         }
 
         /* Slight highlight for the hovered quantity item */
@@ -956,6 +1005,96 @@
                     </p>
                 </div>
             </div>
+         </section>
+        <section class="mb-24 fade-section">
+            <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Singularity</h3>
+            <p class="text-white-400 mb-6">Let's start simple: <b>What is density?</b></p>
+ <div class="equation-bar fade-section">
+                <div class="equation" aria-hidden="false">
+                    <div class="math-display">
+                <div class="equation">
+                    <div class="eq-tex">\[
+                    \rho = \frac{M}{V}
+                    \]</div>
+                </div>
+            </div>
+                </div>
+
+                <!-- RIGHT: symbols only (descriptions stored elsewhere or inline via data-tooltip-text) -->
+                <ul class="quantities" aria-label="Equation quantities">
+                    <li><span class="symbol" data-desc-id="desc-ρ">ρ = density</span></li>
+                    <li><span class="symbol" data-desc-id="desc-M">M = Mass</span></li>
+                    <li><span class="symbol" data-desc-id="desc-V">V = Volume</span></li>
+                </ul>
+            </div>
+            <br>
+            
+ <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+    <div>
+            <p class="text-white-400 mb-6">
+                <b>Density</b> ρ is formally defined as the <b>mass</b> M of a substance confined within a specific <b>volume</b> V. If you take a massive quantity of mass and compress it into a tiny, tiny spot (making V extremely small), that density becomes absolutely wild.
+            </p>
+
+            <p class="text-white-400 mb-6">
+                When density gets huge, gravity gets strong. And as we know, strong gravity does two things: it radically warps space, and more importantly for our model, it <i>slams the brakes on timeflow</i> (reducing the local timeflow, T). High density equals very slow time.
+            </p>
+
+            <p class="text-white-400 mb-6">
+                Now, we hit the theoretical wall: <b>"infinite density."</b> Can infinite density be achieved? Look, true mathematical infinity doesn't exist in our limited universe with its own physics.
+            </p>
+
+           
+</div>
+<div>
+            <div class="flex flex-col items-center relative group">
+                <img loading="lazy" src="https://bigthink.com/wp-content/uploads/2022/05/future_universe_300dpi-e1716333806201.jpg?lb=1536,864" 
+                alt="Spacetime curvature leading to a singularity graph" class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                <p class="text-gray-400 text-base text-center max-w-lg">Graph of Mass and dark matter.</p>
+            </div>
+</div>
+</div>
+ <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+<div> 
+              <div class="flex flex-col items-center relative group">
+                <img loading="lazy" src="https://bigthink.com/wp-content/uploads/2021/10/https___blogs-images.forbes.com_startswithabang_files_2017_12_0_uI_GtoHyQfXNSmMH.jpg?resize=640,644" 
+                alt="types of universe" class="rounded-xl shadow-lg border-4 border-purple-700 mb-6 w-full max-w-xl object-cover" />
+                <p class="text-gray-400 text-base text-center max-w-lg">Different types of universe. My theory supports the last one.</p>
+            </div>
+</div>  
+<div>
+             <p class="text-white-400 mb-6">
+                <b>Formalized Explanation of the Singularity:</b>
+                A gravitational singularity is a region in spacetime where the density becomes so extremely high that the curvature of spacetime tends to infinity, causing the known laws of physics—specifically <b>General Relativity</b>—to fail and become non-predictive.
+            </p>
+
+            <p class="text-white-400 mb-6">
+                But imagine squeezing every single bit of mass and energy the universe holds into a space so tiny it's almost a point. A point is small, sure, but the density achieved is so extreme—so impossibly high—that all our physics, everything we know, just <i>stops working</i>.
+            </p>
+
+            <p class="text-white-400 mb-6">
+                <b>That moment of absolute breakdown is what we call a singularity.</b>
+            </p>
+
+            <p class="text-white-400 mb-6">
+                This isn't just a fun thought experiment; this is what the entire universe was right before the Big Bang—at the literal beginning of time. In that unified state:
+            </p>
+
+            <ul class="mb-6">
+                <li class="text-white-400"><b>Time couldn't flow</b> (Timeflow T tends to 0).</li>
+                <li class="text-white-400">Space was at its <b>maximum compression</b> (a total physical zero point).</li>
+                <li class="text-white-400">There was no dark energy yet, just <b>one incredibly dense, unified state</b> holding all the universe's attractive force within it.</li>
+            </ul>
+
+            </div>
+</div>
+<p class="text-white-400 mb-6">Think of it this way:</p>
+            
+            <blockquote class="note">
+                All mass in the smallest possible space.<br>
+                Or, all mass in the only state where <b>time simply does not exist.</b>
+            </blockquote>
+
+            <p class="text-white-400 mb-6">It's the ultimate frozen state of spacetime.</p>
         </section>
         <section class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
@@ -989,7 +1128,7 @@
                 Watch these videos on the concept of Spacetime for better understanding:
             </p><br>
             <div class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
-
+<!-- Video 1: What if we could see Spacetime? An immersive experience -->
                 <div
                     style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; max-height: 500px; border-radius: 12px; margin-bottom: 24px;">
                     <iframe src="https://www.youtube.com/embed/YNqTamaKMC8"
@@ -998,10 +1137,10 @@
                         allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                     </iframe>
                 </div>
-                <p class="text-center text-gray-500 py-8 border-t border-gray-700"> “What if we could see Spacetime? An
-                    immersive experience”</p>
+                <p class="text-center text-gray-500 py-8 border-t border-gray-700"> “What if we could see Spacetime? An immersive experience”</p>
 
-                <!-- Video 2: I never understood why matter curves spacetime… -->
+<!-- Video 2: I never understood why matter curves spacetime… -->
+
                 <div
                     style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;">
                     <iframe src="https://www.youtube.com/embed/qKZvAwcXceE" title="YouTube video player" frameborder="0"
@@ -1082,6 +1221,9 @@
             hole. (but these two events are not the same)</div>
         <div id="desc-velocity">The speed of an object in a specific direction.</div>
         <div id="desc-distance">The total length of the path traveled by an object.</div>
+        <div id="desc-ρ">Density is defined as mass per unit volume.</div>
+        <div id="desc-M">Mass is a measure of the amount of matter in an object.</div>
+        <div id="desc-V">Volume is the amount of three-dimensional space occupied by an object.</div>
         <div id="desc-absolute">Everything in this universe is absolute.</div>
         <div id="desc-disymmetrical">???</div>
     </div>
@@ -1278,7 +1420,7 @@
             window.addEventListener('resize', revealSections);
             revealSections();
 
-            // Remove gradient hover JS
+            // Gradient hover effect for titles
             function addGradientHover(id) {
                 const el = document.getElementById(id);
                 if (!el) return;
