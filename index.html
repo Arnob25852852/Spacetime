@@ -306,6 +306,10 @@
         /* Nav toggle button animation */
         #nav-toggle{ transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 200ms ease; }
 
+        /* Start (Begin Exploration) button started state */
+        a#startLink.started{ opacity: 0.95; background: linear-gradient(135deg,#6d28d9 0%, #5b21b6 100%); pointer-events: auto; cursor: default; box-shadow: 0 10px 40px rgba(59,13,116,0.35); }
+        a#startLink.started:hover{ transform: none; box-shadow: 0 10px 40px rgba(59,13,116,0.35); }
+
         /* removed extra pop keyframe — keep interactions simple */
 
         /* Mobile adjustments: full-screen panel and touch sized buttons */
@@ -316,6 +320,8 @@
 
         /* Settings modal */
         .settings-modal{ position: fixed; left: 50%; top: 18%; transform: translate(-50%,-10%); width:min(420px, 92vw); background: linear-gradient(180deg,#071029,#071018); border-radius:12px; padding:0.6rem; border:1px solid rgba(255,255,255,0.04); box-shadow:0 18px 60px rgba(2,6,23,0.85); opacity:0; pointer-events:none; max-height:0; overflow:hidden; transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease, max-height 260ms ease; z-index:10090; }
+        .settings-header { cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
+        .settings-header.dragging { cursor: grabbing; }
         .settings-modal.open{ box-shadow: 0 52px 120px rgba(2,6,23,0.95); border-color: rgba(124,58,237,0.12); transform: translate(-50%,0) scale(1); z-index:10095; }
         .settings-modal:focus-within{ box-shadow: 0 72px 160px rgba(2,6,23,0.98); }
         .settings-modal .theme-btn{ min-width: 110px; }
@@ -743,11 +749,11 @@
         <div class="stars" id="starfield"></div>
 
         <!-- Hero Content (z-index 200 to ensure it's above stars) -->
-        <div class="p-8 max-w-3xl relative z-20 ml-auto text-right sm:ml-0 sm:text-center pr-8">
-            <p class="text-xl text-purple-400 mb-4 animate-pulse">
+        <div class="p-6 max-w-2xl relative z-20 mx-auto text-center pr-4">
+            <p class="text-lg text-purple-400 mb-3 animate-pulse">
                 <span id="relativity-sign">//Relative</span>
             </p>
-            <h1 style="font-size: 4rem;"><span id="inline-title"
+            <h1 class="text-5xl sm:text-6xl md:text-[4rem] leading-tight"><span id="inline-title"
                     class="cursive-title text-purple-400 transition-opacity duration-700">Spacetime</span></h1>
             <h2
                 class="text-4xl md:text-6xl font-black mb-6 leading-tight flex flex-wrap items-center justify-center gap-2">
@@ -1438,8 +1444,16 @@
             // --- INITIAL CLICK HANDLER ---
 
             if (startLink && audio) {
-                    const startExplorationHandler = function (e) {
+                let explorationStarted = false;
+                const startExplorationHandler = function (e) {
                     e.preventDefault();
+                    if (explorationStarted) {
+                        // already started: just scroll to main - don't retrigger audio logic
+                        document.getElementById('main-content')?.scrollIntoView({ behavior: 'smooth' });
+                        return;
+                    }
+                    explorationStarted = true;
+
                     // 1. Unmute and start music via central helper and fade in
                     try {
                         setMusicOn(true); // ensures central state is updated and indicator shown
@@ -1451,9 +1465,10 @@
                         audio.play().catch(()=>{});
                     }
 
-                    // 2. Remove listener and hide the start link
-                    startLink.removeEventListener('click', startExplorationHandler);
-                    startLink.style.display = 'none';
+                    // 2. Keep the start link visible but update its visual state
+                    startLink.classList.add('started');
+                    startLink.setAttribute('aria-pressed', 'true');
+                    startLink.textContent = 'Exploring';
 
                     // 3. Scroll to main content smoothly
                     document.getElementById('main-content')?.scrollIntoView({ behavior: 'smooth' });
@@ -1922,16 +1937,58 @@
 
         document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') { if (settingsModal.classList.contains('open')) { closeSettings(); return; } if (navPanel.classList.contains('open')) closeNav(); } });
 
-        // Dragging the settings modal (pointer events)
-        let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
-        settingsDragHandle?.addEventListener('pointerdown', (e)=>{
-            isDragging = true; settingsModal.style.transition = 'none';
-            const rect = settingsModal.getBoundingClientRect(); dragOffsetX = e.clientX - rect.left; dragOffsetY = e.clientY - rect.top; settingsDragHandle.setPointerCapture && settingsDragHandle.setPointerCapture(e.pointerId);
+        // Dragging the settings modal (pointer events) — improved: movement threshold + disable on small screens + pointer capture + prevent selection
+        let isPointerDown = false, isDragging = false, dragOffsetX = 0, dragOffsetY = 0, dragStartX = 0, dragStartY = 0;
+        const DRAG_THRESHOLD = 6; // px
+        settingsDragHandle?.addEventListener('pointerdown', (e) => {
+            // Only enable dragging on medium+ screens to avoid interfering with mobile scrolling
+            if (window.innerWidth <= 720) return;
+            if (e.button && e.button !== 0) return;
+            isPointerDown = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            // prepare for a possible drag
+            settingsModal.style.transition = 'none';
+            settingsDragHandle.setPointerCapture && settingsDragHandle.setPointerCapture(e.pointerId);
         });
-        document.addEventListener('pointermove', (e)=>{
-            if (!isDragging) return; let left = e.clientX - dragOffsetX; let top = e.clientY - dragOffsetY; left = Math.max(8, Math.min(window.innerWidth - settingsModal.offsetWidth - 8, left)); top = Math.max(8, Math.min(window.innerHeight - settingsModal.offsetHeight - 8, top)); settingsModal.style.left = left + 'px'; settingsModal.style.top = top + 'px'; settingsModal.style.transform = 'none';
+        document.addEventListener('pointermove', (e) => {
+            if (!isPointerDown) return;
+            const dx = Math.abs(e.clientX - dragStartX);
+            const dy = Math.abs(e.clientY - dragStartY);
+            if (!isDragging) {
+                // wait until movement exceeds threshold to start real dragging
+                if (dx < DRAG_THRESHOLD && dy < DRAG_THRESHOLD) return;
+                isDragging = true;
+                settingsDragHandle.classList.add('dragging');
+                const rect = settingsModal.getBoundingClientRect();
+                dragOffsetX = e.clientX - rect.left;
+                dragOffsetY = e.clientY - rect.top;
+                // avoid text selection while dragging
+                document.body.style.userSelect = 'none';
+            }
+            let left = e.clientX - dragOffsetX;
+            let top = e.clientY - dragOffsetY;
+            left = Math.max(8, Math.min(window.innerWidth - settingsModal.offsetWidth - 8, left));
+            top = Math.max(8, Math.min(window.innerHeight - settingsModal.offsetHeight - 8, top));
+            settingsModal.style.left = left + 'px';
+            settingsModal.style.top = top + 'px';
+            settingsModal.style.transform = 'none';
+        }, { passive: true });
+        document.addEventListener('pointerup', (e) => {
+            if (!isPointerDown) return;
+            isPointerDown = false;
+            if (!isDragging) {
+                // no actual drag happened
+                settingsModal.style.transition = '';
+                settingsDragHandle.releasePointerCapture && settingsDragHandle.releasePointerCapture(e.pointerId);
+                return;
+            }
+            isDragging = false;
+            settingsDragHandle.classList.remove('dragging');
+            settingsModal.style.transition = '';
+            document.body.style.userSelect = '';
+            settingsDragHandle.releasePointerCapture && settingsDragHandle.releasePointerCapture(e.pointerId);
         });
-        document.addEventListener('pointerup', (e)=>{ if (!isDragging) return; isDragging = false; settingsModal.style.transition = ''; settingsDragHandle.releasePointerCapture && settingsDragHandle.releasePointerCapture(e.pointerId); });
 
         // --- Star density control ---
         const starField = document.getElementById('starfield');
