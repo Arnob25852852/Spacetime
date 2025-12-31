@@ -226,6 +226,129 @@
             transform: translateY(0);
         }
 
+        /* Make sure navigation targets are not hidden under fixed elements */
+        section { scroll-margin-top: 92px; }
+        @media (max-width:720px){ section{ scroll-margin-top: 64px; } }
+
+        /* Navigation button (top-left so it doesn't overlap the hero title) */
+        /* Nav toggle (bottom-left) with improved animation */
+        #nav-toggle { position: fixed; bottom: 16px; left: 16px; right: auto; z-index: 10003; width:56px; height:56px; border-radius:999px; background: linear-gradient(135deg,#7c3aed 0%, #6d28d9 100%); color:#fff; border:1px solid rgba(167,139,250,0.12); cursor:pointer; box-shadow: 0 18px 48px rgba(99,66,204,0.14); transition: transform 1.5s cubic-bezier(.2,.9,.2,1), box-shadow 2.5s ease, background 2s ease; display:flex; align-items:center; justify-content:center; font-size:20px; }
+        #nav-toggle:hover{ transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 40px rgba(127, 88, 255, 0.819); }
+        #nav-toggle:focus{ outline: 3px solid rgba(124,58,237,0.18); outline-offset: 2px; }
+        /* Click burst animation */
+        /* Simplified: no popping animation — keep hover subtle and cool like index.html */
+        /* Hover handled by #nav-toggle:hover rule (translateY + scale + box-shadow) */
+        /* State when nav is open */
+        #nav-toggle.open { transform: rotate(90deg) scale(1.04); box-shadow: 0 26px 68px rgba(99,66,204,0.18); }
+
+        /* Overlay and panel */
+        .nav-overlay{ position: fixed; inset:0; background: rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition: opacity 220ms ease; z-index:10002; }
+        .nav-overlay.visible{ opacity:1; pointer-events:auto; }
+        .nav-panel{ position: fixed; top:0; left:0; height:100%; width: min(340px, 86vw); background: linear-gradient(180deg,#241233 0%, #081023 100%); border-right:1px solid rgba(124,58,237,0.10); box-shadow: 12px 0 80px rgba(20,8,40,0.9); transform: translateX(-110%); opacity:0; transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 320ms ease; z-index:10005; padding:1rem; display:flex; flex-direction:column; }
+        .nav-panel.open{ transform: translateX(0); opacity:1; }
+       .nav-close{
+            align-self:flex-end;
+            background:transparent;
+            border:none;
+            color:#fff;
+            font-size:18px;
+            cursor:pointer;
+            padding:6px;
+            border-radius:6px;
+            cursor: pointer;
+            transition: transform 160ms ease, background 120ms ease, box-shadow 220ms ease, border-color 160ms ease;
+            z-index: 10010;
+        }
+        .nav-close:hover{ transform: translateY(-2px) scale(1.03); background: rgba(255,255,255,0.04); box-shadow: 0 8px 24px rgba(7,9,29,0.6); border-color: rgba(124,58,237,0.12); }
+        .nav-close:focus{ outline: 2px solid rgba(124,58,237,0.14); outline-offset: 2px; }
+        /* Nav list: scrollable area with sticky footer reserved space */
+        .nav-list{ list-style:none; padding:12px 8px; margin: 1rem 0; display:flex; flex-direction:column; gap:0.6rem; align-items:flex-start; flex:1 1 auto; max-height: calc(100vh - 220px); overflow-y:auto; -webkit-overflow-scrolling: touch; }
+        .nav-list .nav-link{ color: #e6eefb; text-decoration:none; padding:0.6rem 0.9rem; border-radius:10px; display:inline-block; width:auto; transition: background .28s ease, color .28s ease, transform .3s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, text-decoration .28s ease; }
+        /* Footer/pinned settings inside the panel */
+        .nav-footer{ 
+            border-top: 1px solid rgba(255,255,255,0.03); 
+            padding: 12px; 
+            display:flex; 
+            justify-content:center; 
+            gap:8px; 
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.05)); 
+            position:sticky; 
+            bottom:0; }
+        .nav-footer .compact-btn{ background: transparent; border:1px solid rgba(255,255,255,0.04); padding:10px 5px; border-radius:12px; color: #e6eefb; cursor:pointer; transition: transform 520ms ease, box-shadow 1s ease, background 160ms ease; }
+
+        .nav-footer .compact-btn:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(176, 97, 255, 0.894); background: rgba(255,255,255,0.02); }
+        @media (max-width:420px){ .nav-footer .compact-btn{ padding:14px 18px; font-size:1rem; } }
+
+        /* Nav panel entrance/exit animations */
+        /* Enhanced panel animation: slide + overshoot + gentle scale */
+        @keyframes navPanelIn {
+            0% { transform: translateX(-120%) scaleX(.96) skewX(-2deg); opacity: 0; filter: blur(2px); }
+            60% { transform: translateX(8%) scaleX(1.02) skewX(0deg); opacity: 1; filter: blur(0); }
+            100% { transform: translateX(0) scaleX(1); opacity: 1; }
+        }
+        @keyframes navPanelOut {
+            0% { transform: translateX(0) scaleX(1); opacity:1; }
+            70% { transform: translateX(-6%) scaleX(.99); opacity:0.6; }
+            100% { transform: translateX(-120%) scaleX(.96); opacity:0; }
+        }
+        .nav-panel.open{ animation: navPanelIn 540ms cubic-bezier(.15,.85,.2,1) both; box-shadow: 24px 12px 120px rgba(10,6,30,0.85); }
+        .nav-panel.closing{ animation: navPanelOut 420ms cubic-bezier(.2,.8,.2,1) both; }
+
+        /* Nav link entrance — staggered using --i variable set in JS */
+        .nav-list .nav-link{ opacity:0; transform: translateX(-8px) scale(.995); transform-origin: left center; }
+        .nav-panel.open .nav-list .nav-link{ animation: navLinkIn 720ms cubic-bezier(.2,.9,.2,1) both; animation-delay: calc(var(--i,0) * 40ms); }
+        @keyframes navLinkIn{ 0%{ opacity:0; transform: translateX(-10px) scale(.98);} 70%{ transform: translateX(4px) scale(1.008); } 100%{ opacity:1; transform: translateX(0) scale(1); } }
+
+        /* Overlay fade smoothing */
+        .nav-overlay{ position: fixed; inset:0; background: rgba(0,0,0,0.64); opacity:0; pointer-events:none; transition: opacity 320ms cubic-bezier(.2,.9,.2,1); z-index:10002; }
+        .nav-overlay.visible{ opacity:1; pointer-events:auto; }
+
+        /* Nav toggle button animation */
+        #nav-toggle{ transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 200ms ease; }
+
+        /* removed extra pop keyframe — keep interactions simple */
+
+        /* Mobile adjustments: full-screen panel and touch sized buttons */
+        @media (max-width:720px){ .nav-panel{ width:100vw; left:0; right:0; } .nav-list{ max-height: calc(100vh - 220px); padding: 16px; } .nav-list .nav-link{ display:block; width:100%; padding:1rem 14px; font-size:1.02rem; }
+        .nav-footer{ padding:14px 12px; }
+        }
+        .nav-list .nav-link:hover, .nav-list .nav-link:focus{ background: rgba(255,255,255,0.03); color:#e6eefb; outline:none; transform: translateX(12px) translateY(-4px) scale(1.05); text-shadow: 0 0 2px #79cbe9, 0 0 8px #5c8de9; box-shadow: 0 8px 24px rgba(0,0,0,0.2); text-decoration: underline; }
+
+        /* Settings modal */
+        .settings-modal{ position: fixed; left: 50%; top: 18%; transform: translate(-50%,-10%); width:min(420px, 92vw); background: linear-gradient(180deg,#071029,#071018); border-radius:12px; padding:0.6rem; border:1px solid rgba(255,255,255,0.04); box-shadow:0 18px 60px rgba(2,6,23,0.85); opacity:0; pointer-events:none; max-height:0; overflow:hidden; transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease, max-height 260ms ease; z-index:10090; }
+        .settings-modal.open{ box-shadow: 0 52px 120px rgba(2,6,23,0.95); border-color: rgba(124,58,237,0.12); transform: translate(-50%,0) scale(1); z-index:10095; }
+        .settings-modal:focus-within{ box-shadow: 0 72px 160px rgba(2,6,23,0.98); }
+        .settings-modal .theme-btn{ min-width: 110px; }
+        .settings-modal.open{ box-shadow: 0 52px 120px rgba(2,6,23,0.95); border-color: rgba(124,58,237,0.12); transform: translate(-50%,0) scale(1); }
+        /* Floating settings button */
+        .settings-floating{ box-shadow: 0 18px 48px rgba(7,9,29,0.65); border:1px solid rgba(124,58,237,0.1); background: linear-gradient(180deg,#071029,#041018); }
+        .settings-floating:hover{ transform: translateY(-4px) scale(1.03); }
+        .settings-floating:active{ transform: translateY(0) scale(.98); }
+        .settings-modal.open{ box-shadow: 0 52px 120px rgba(2,6,23,0.95); border-color: rgba(124,58,237,0.12); transform: translate(-50%,0) scale(1); }
+        .settings-row button, .theme-btn { transition: transform 180ms ease, box-shadow 220ms ease, background 160ms ease; }
+        .settings-row button:hover, .theme-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 48px rgba(7,9,29,0.6); }
+        .settings-row { padding: 0.4rem; border-radius: 8px; transition: background 180ms ease, box-shadow 180ms ease; }
+        .settings-row:hover { background: rgba(255,255,255,0.02); box-shadow: 0 10px 30px rgba(2,6,23,0.6); }
+        .settings-modal.open{ transform: translate(-50%,0); opacity:1; pointer-events:auto; max-height: 80vh; }
+        /* Pin the close button to the top-right corner of the modal */
+        .settings-close{
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(255,255,255,0.02);
+            color: #e6eefb;
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 6px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 520ms ease, background 1000ms ease;
+            z-index: 10100;
+        }
+        .settings-close:hover{ transform: translateY(-2px) scale(1.03); background: rgba(255,255,255,0.04); }
+
+        /* Reduce motion helper */
+        .reduce-motion .fade-section, .reduce-motion .star, .reduce-motion .nav-panel, .reduce-motion .nav-toggle { transition-duration: 0.01s !important; animation-duration: 0.01s !important; }
+
         /* Relativity/Absolute animation */
         #relativity-sign {
             display: inline-block;
@@ -553,6 +676,66 @@
         Spacetime
     </h1>
 
+    <!-- Navigation Toggle & Panel (positioned bottom-right; moved from top) -->
+    <nav id="nav-panel" class="nav-panel" aria-hidden="true" role="dialog" aria-modal="true">
+        <button id="nav-close" class="nav-close" aria-label="Close navigation">✕</button>
+        <ul class="nav-list" role="menu" aria-label="Main navigation">
+            <!-- Links will be generated automatically from <main> sections -->
+            <li class="nav-spacer" aria-hidden="true"></li>
+        </ul>
+        <!-- Pinned footer inside the panel (stays visible when nav list scrolls) -->
+        <div class="nav-footer" aria-hidden="false">
+            <button id="settings-toggle" type="button" class="settings-toggle settings-open compact-btn" aria-expanded="false" aria-controls="settings-modal">⚙ Settings</button>
+        </div>
+    </nav>
+    <div id="nav-overlay" class="nav-overlay" aria-hidden="true"></div>
+
+    <!-- Draggable Floating Settings Modal -->
+    <div id="settings-modal" class="settings-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="settings-header" id="settings-drag-handle">
+            <strong>Settings</strong>
+            <button id="settings-close" class="settings-close" aria-label="Close settings">✕</button>
+        </div>
+        <div class="settings-body">
+            <div class="settings-section">
+                <h4 style="margin:0 0 8px 0; color:#d7d7e6; font-size:0.95rem;">Visual</h4>
+                <div class="settings-row">
+                    <label style="width:140px;">Star Density</label>
+                    <input id="star-density" type="range" min="50" max="600" value="150">
+                </div>
+                <div class="settings-row" style="align-items:center; gap:0.6rem;">
+                    <label style="width:140px;"><input id="reduce-motion" type="checkbox"> Reduce Motion</label>
+                </div>
+                <div class="settings-row">
+                    <label style="width:140px;">Animation Speed</label>
+                    <input id="anim-speed" type="range" min="0.4" max="1.6" step="0.05" value="1">
+                    <span id="anim-speed-label" style="margin-left:8px;color:#bfc7d9">1×</span>
+                </div>
+            </div>
+
+            <div class="settings-section" style="margin-top:8px;">
+                <h4 style="margin:0 0 8px 0; color:#d7d7e6; font-size:0.95rem;">Audio</h4>
+                <div class="settings-row" style="align-items:center; gap:0.6rem;">
+                    <button id="music-playpause" class="theme-btn">Play</button>
+                    <label><input id="music-toggle" type="checkbox"> Background Music</label>
+                </div>
+                <div class="settings-row">
+                    <label style="width:140px;">Music Volume</label>
+                    <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.6">
+                </div>
+            </div>
+
+            <div class="settings-section" style="margin-top:12px;">
+                <h4 style="margin:0 0 8px 0; color:#d7d7e6; font-size:0.95rem;">Actions</h4>
+                <div class="settings-row" style="display:flex; gap:0.6rem;">
+                    <button id="reset-reveals" class="theme-btn">Reset Reveals</button>
+                    <button id="reset-modal-pos" class="theme-btn">Reset Modal Position</button>
+                    <button id="restore-defaults" class="theme-btn">Restore Defaults</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 2. Hero Section (To be scrolled past) -->
     <section id="hero-section" class="hero-space">
 
@@ -560,7 +743,7 @@
         <div class="stars" id="starfield"></div>
 
         <!-- Hero Content (z-index 200 to ensure it's above stars) -->
-        <div class="p-8 max-w-3xl relative z-20">
+        <div class="p-8 max-w-3xl relative z-20 ml-auto text-right sm:ml-0 sm:text-center pr-8">
             <p class="text-xl text-purple-400 mb-4 animate-pulse">
                 <span id="relativity-sign">//Relative</span>
             </p>
@@ -584,7 +767,7 @@
     <main id="main-content" class="min-h-[200vh] p-8 md:p-16 bg-[#0c0a09] relative z-50">
 
         <!-- Feature 1a: What is Spacetime? -->
-        <section class="mb-24 fade-section">
+        <section id="section-1" data-nav="What is Spacetime?" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 What is Spacetime?
             </h3>
@@ -637,7 +820,7 @@
             </div>
         </section>
         <!-- Feature 1b: Bending of Spacetime (Gravity and Mass) -->
-        <section class="mb-24 fade-section">
+        <section id="section-2" data-nav="How Does Spacetime Bend?" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 How Does Spacetime Bend?
             </h3>
@@ -683,7 +866,7 @@
             </div>
         </section>
         <!-- section 3-->
-        <section class="mb-24 fade-section">
+        <section id="section-3" data-nav="How Does Spacetime Stretch?" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 How Does Spacetime Stretch?
             </h3>
@@ -727,7 +910,7 @@
             </div>
         </section>
         <!-- section 4-->
-        <section class="mb-24 fade-section">
+        <section id="section-4" data-nav="Spacetime & Matter" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Spacetime & Matter <strong>(Spacetime without time)</strong>
             </h3>
@@ -772,7 +955,7 @@
             </p>
         </section>
 
-        <section class="mb-24 fade-section">
+        <section id="section-8" data-nav="Spacetime & Dark Energy" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Spacetime & Dark Energy <strong>(Spacetime with excessive time)</strong>
             </h3>
@@ -821,7 +1004,7 @@
             <p>In short: <b>matter = frozen spacetime</b>, <b>dark energy = hyperactive spacetime</b>.</p>
         </section>
 
-        <section class="mb-24 fade-section">
+        <section id="section-9" data-nav="Time" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Time <strong>Flow</strong>
             </h3>
@@ -873,7 +1056,7 @@
             </p>
         </section>
 
-        <section class="mb-24 fade-section">
+        <section id="section-10" data-nav="Time Dilatation" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Time Dilatation
             </h3>
@@ -946,7 +1129,7 @@
 </div>    </div>
         </section>
         <!-- Feature 2: Scroll-Driven Data Storytelling -->
-        <section class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
+        <section id="section-11" data-nav="Black Holes & Voids" class="mb-24 grid grid-cols-1 md:grid-cols-2 gap-12 fade-section">
             <div>
                 <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Blackholes</h3>
 
@@ -1006,7 +1189,7 @@
                 </div>
             </div>
          </section>
-        <section class="mb-24 fade-section">
+        <section id="section-5" data-nav="Singularity" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">Singularity</h3>
             <p class="text-white-400 mb-6">Let's start simple: <b>What is density?</b></p>
  <div class="equation-bar fade-section">
@@ -1096,7 +1279,7 @@
 
             <p class="text-white-400 mb-6">It's the ultimate frozen state of spacetime.</p>
         </section>
-        <section class="mb-24 fade-section">
+        <section id="section-6" data-nav="Additional notes" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Some unclear concepts (not completely and properly understood yet)
             </h3>
@@ -1120,7 +1303,7 @@
             </p>
         </section>
 
-        <section class="mb-24 fade-section">
+        <section id="section-7" data-nav="Fun Videos" class="mb-24 fade-section">
             <h3 class="text-4xl font-bold text-white mb-6 border-b border-purple-700 pb-2">
                 Become bored of reading?
             </h3>
@@ -1153,7 +1336,7 @@
                     curves spacetime… until now!”</p>
             </div>
         </section>
-
+<section id="section-12" data-nav="Info" class="mb-24 fade-section">
         <footer class="text-center text-gray-500 py-8 border-t border-gray-700">
             Website designed and developed by <a href="mailto:88arnob88@gmail.com"
                 class="text-blue-400 hover:underline font-medium">
@@ -1164,17 +1347,13 @@
             &copy; 2025 Spacetime Exploration. All rights reserved.
         </footer>
         <footer class="text-gray-500 py-8 ">
-            version 1.0.5
-            [Singularity]
+            version 1.1.0 &#8226; Last updated: Jan 2026 &#8226;
+            [Navigation Panel]
         </footer>
-        <button id="musicToggle" class="
-        fixed bottom-4 right-4 z-50 p-4 rounded-full 
-        bg-purple-700 hover:bg-purple-600 text-white 
-        shadow-2xl shadow-purple-900/80 transition duration-300 
-        transform hover:scale-110 active:scale-90 opacity-0 pointer-events-none" aria-label="Toggle Background Music">
-            <!-- Icon will be inserted by Lucide/JavaScript -->
-            <i data-lucide="volume-2" class="w-6 h-6"></i>
-        </button>
+        </section>
+        <!-- Nav toggle (moved to bottom-left) -->
+        <button id="nav-toggle" class="fixed bottom-4 left-4 z-50 p-4 rounded-full bg-purple-700 hover:bg-purple-600 text-white shadow-2xl transition duration-300 transform" aria-label="Open navigation" aria-expanded="false">☰</button>
+        <!-- (Settings opener lives in the nav panel footer now) -->
     </main>
 
     <!-- fullscreen image modal -->
@@ -1232,8 +1411,7 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const startLink = document.getElementById('startLink');
             const audio = document.getElementById('backgroundAudio');
-            const musicToggle = document.getElementById('musicToggle');
-            const toggleIconContainer = musicToggle.querySelector('i');
+            const musicIndicator = document.getElementById('music-indicator');
 
             const targetVolume = 0.35; // Background music volume (35%)
             const fadeDuration = 2500;  // 2.5 seconds fade-in
@@ -1259,74 +1437,48 @@
 
             // --- INITIAL CLICK HANDLER ---
 
-            if (startLink && audio && musicToggle) {
-                startLink.addEventListener('click', function (e) {
+            if (startLink && audio) {
+                    const startExplorationHandler = function (e) {
+                    e.preventDefault();
+                    // 1. Unmute and start music via central helper and fade in
+                    try {
+                        setMusicOn(true); // ensures central state is updated and indicator shown
+                        fadeInVolume(audio, targetVolume, fadeDuration);
+                        try { localStorage.setItem('musicOn', 'true'); const cb = document.getElementById('music-toggle'); if (cb) cb.checked = true; } catch (err) {}
+                    } catch (err) {
+                        // Fallback to direct play
+                        audio.muted = false;
+                        audio.play().catch(()=>{});
+                    }
 
-                    // 1. User Gesture: Play and Unmute
-                    audio.muted = false;
-                    audio.play()
-                        .then(() => {
-                            // 2. Start the smooth volume fade-in
-                            fadeInVolume(audio, targetVolume, fadeDuration);
+                    // 2. Remove listener and hide the start link
+                    startLink.removeEventListener('click', startExplorationHandler);
+                    startLink.style.display = 'none';
 
-                            // 3. Show the toggle button immediately after starting
-                            musicToggle.classList.remove('opacity-0', 'pointer-events-none');
-                            musicToggle.classList.add('opacity-100');
+                    // 3. Scroll to main content smoothly
+                    document.getElementById('main-content')?.scrollIntoView({ behavior: 'smooth' });
+                };
 
-                            // 4. Update the toggle icon to 'Pause' since it is now playing
-                            updateToggleIcon('playing');
-
-                            // 5. Remove the listener to prevent repeated fade-ins
-                            startLink.removeEventListener('click', arguments.callee);
-                            startLink.style.display = 'none'; // Optional: hide the start button
-                        })
-                        .catch(error => {
-                            console.warn("Autoplay was blocked. Music control button still available, but requires click.");
-                            // If play fails, we still show the control so user can try manually
-                            musicToggle.classList.remove('opacity-0', 'pointer-events-none');
-                            musicToggle.classList.add('opacity-100');
-                            updateToggleIcon('paused');
-                        });
-                });
+                // Attach handler even if there isn't a music indicator element
+                startLink.addEventListener('click', startExplorationHandler);
             }
 
             // --- MUSIC TOGGLE HANDLER ---
 
-            function updateToggleIcon(state) {
-                // Clear old icon/content
-                toggleIconContainer.innerHTML = '';
-
-                // Create new icon element
+            function updateMusicIndicator(state) {
+                if (!musicIndicator) return;
+                musicIndicator.innerHTML = '';
                 const icon = document.createElement('i');
-                icon.classList.add('w-6', 'h-6');
-
-                if (state === 'playing') {
-                    icon.setAttribute('data-lucide', 'volume-2'); // Speaker with sound waves
-                } else {
-                    icon.setAttribute('data-lucide', 'volume-x'); // Speaker with mute sign
-                }
-                toggleIconContainer.appendChild(icon);
-
-                // Rerender Lucide icons
+                icon.classList.add('w-5', 'h-5');
+                if (state === 'playing') icon.setAttribute('data-lucide', 'volume-2'); else icon.setAttribute('data-lucide', 'volume-x');
+                musicIndicator.appendChild(icon);
                 lucide.createIcons();
             }
 
-            musicToggle.addEventListener('click', () => {
-                if (audio.paused) {
-                    // It was paused, so we play it
-                    audio.play().catch(error => {
-                        console.error("Manual play failed:", error);
-                    });
-                    updateToggleIcon('playing');
-                } else {
-                    // It was playing, so we pause it
-                    audio.pause();
-                    updateToggleIcon('paused');
-                }
-            });
 
-            // Initial icon setup (it will be hidden, but correct state needed if it shows up)
-            updateToggleIcon('paused');
+
+            // Initial icon setup (shows in Settings)
+            updateMusicIndicator('paused');
         });
 
 
@@ -1600,7 +1752,312 @@
             window.addEventListener('resize', () => tooltip.classList.remove('visible'));
         });
     </script>
+    <script>
+    // Added features: nav panel, settings, star density, music controls, fade-reset
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Navigation panel ---
+        const navToggle = document.getElementById('nav-toggle');
+        const navPanel = document.getElementById('nav-panel');
+        const navClose = document.getElementById('nav-close');
+        const navOverlay = document.getElementById('nav-overlay');
+        let navLinks = [];
+
+        const navItems = Array.from(document.querySelectorAll('.nav-list > li'));
+
+        // Build nav from sections automatically and watch for changes
+        function buildNav(){
+            const navList = document.querySelector('.nav-list');
+            const spacer = navList.querySelector('.nav-spacer');
+            const settingsItem = navList.querySelector('.nav-settings');
+            // remove existing generated links
+            navList.querySelectorAll('li.generated').forEach(n => n.remove());
+            // find sections in main and create links
+            const sections = Array.from(document.querySelectorAll('main section'));
+            sections.forEach((sec, i) => {
+                const title = sec.dataset.nav || sec.querySelector('h2, h3')?.innerText?.trim() || sec.id || ('section-' + (i+1));
+                const id = sec.id || ('section-auto-' + (i+1));
+                if (!sec.id) sec.id = id;
+                const li = document.createElement('li'); li.classList.add('generated');
+                const a = document.createElement('a'); a.className = 'nav-link'; a.href = '#' + sec.id; a.textContent = title;
+                a.addEventListener('click', (e)=>{ e.preventDefault(); closeNav(); setTimeout(()=>document.getElementById(sec.id).scrollIntoView({behavior:'smooth', block:'start'}), 300); });
+                li.style.setProperty('--i', i);
+                li.appendChild(a);
+                navList.insertBefore(li, spacer);
+            });
+            navLinks = Array.from(document.querySelectorAll('.nav-link'));
+        }
+        // run at start
+        buildNav();
+        // watch for added sections
+        const observerSections = new MutationObserver((mutations)=>{ buildNav(); });
+        observerSections.observe(document.querySelector('main'), { childList: true, subtree: true });
+        // Open the navigation panel (improved)
+        function openNav() {
+            navItems.forEach((li, i) => li.style.setProperty('--i', i));
+            navPanel.classList.remove('closing');
+            navPanel.classList.add('open');
+            navOverlay.classList.add('visible');
+            navToggle.classList.add('hidden');
+            navToggle.classList.add('open');
+            navToggle.setAttribute('aria-expanded', 'true');
+            navPanel.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            const focusable = navPanel.querySelectorAll('a,button,input,select,textarea');
+            if (focusable && focusable.length) focusable[0].focus();
+        }
+
+        // Close the navigation panel (animated)
+        function closeNav() {
+            // trigger closing animation and wait for it to finish using animationend when possible
+            navPanel.classList.add('closing');
+            navOverlay.classList.remove('visible');
+            navToggle.classList.remove('open');
+            navToggle.classList.remove('hidden');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navPanel.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            const onNavAnimEnd = (e) => {
+                if (e.target !== navPanel) return;
+                navPanel.classList.remove('open');
+                navPanel.classList.remove('closing');
+                navPanel.removeEventListener('animationend', onNavAnimEnd);
+                navToggle.focus();
+            };
+            navPanel.addEventListener('animationend', onNavAnimEnd);
+            // fallback in case animationend doesn't fire
+            setTimeout(()=>{ try{ navPanel.classList.remove('open'); navPanel.classList.remove('closing'); navToggle.focus(); }catch(e){} }, 700);
+            if (settingsModal.classList.contains('open')) {
+                closeSettings();
+            }
+        }
+
+        // Toggle handler on the top-left button
+        navToggle.addEventListener('click', () => {
+            if (navPanel.classList.contains('open')) closeNav(); else openNav();
+        });
+
+        // Close triggers
+        navClose.addEventListener('click', closeNav);
+        navOverlay.addEventListener('click', closeNav);
+
+        // Smooth scroll: close panel then scroll to target (with slight delay for animation)
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (!href || !href.startsWith('#')) return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    closeNav();
+                    // allow panel close animation to finish before scrolling
+                    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+                }
+            });
+        });
+
+        // Accessibility: close on Escape and trap Tab focus inside the panel (and settings)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (settingsModal.classList.contains('open')) { closeSettings(); return; }
+                if (navPanel.classList.contains('open')) closeNav();
+            }
+
+            if (e.key === 'Tab' && navPanel.classList.contains('open')) {
+                const focusable = Array.from(navPanel.querySelectorAll('a,button,input,select,textarea')).filter(el => !el.hasAttribute('disabled'));
+                if (!focusable.length) return;
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        // --- Settings modal ---
+        const settingsToggle = document.getElementById('settings-toggle');
+        const settingsModal = document.getElementById('settings-modal');
+        const settingsClose = document.getElementById('settings-close');
+        const settingsDragHandle = document.getElementById('settings-drag-handle');
+
+        function openSettings(){
+            // restore default centered position (in case it was dragged off-screen)
+            settingsModal.style.left = '';
+            settingsModal.style.top = '';
+            settingsModal.style.transform = 'translate(-50%,-10%)';
+            settingsModal.classList.add('open');
+            settingsModal.setAttribute('aria-hidden','false');
+            const toggleBtn = document.getElementById('settings-toggle') || document.querySelector('.settings-open');
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded','true');
+            // ensure it sits above overlays and the nav panel
+            settingsModal.style.zIndex = '100500';
+            // force visible as a fallback in case CSS rules are overridden
+            settingsModal.style.maxHeight = '80vh';
+            settingsModal.style.opacity = '1';
+            settingsModal.style.pointerEvents = 'auto';
+            setTimeout(()=> settingsModal.querySelector('input,button,select')?.focus(), 120);
+        }
+        function closeSettings(){
+            settingsModal.classList.remove('open');
+            settingsModal.setAttribute('aria-hidden','true');
+            const toggleBtn = document.getElementById('settings-toggle') || document.querySelector('.settings-open');
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded','false');
+            // cleanup inline styles we may have set when opening
+            settingsModal.style.zIndex = '';
+            settingsModal.style.maxHeight = '';
+            settingsModal.style.opacity = '';
+            settingsModal.style.pointerEvents = '';
+        }
+
+        settingsToggle?.addEventListener('click', (e)=>{ e.stopPropagation(); if (settingsModal.classList.contains('open')) closeSettings(); else openSettings(); });
+        settingsClose?.addEventListener('pointerdown', (e)=>e.stopPropagation());
+        settingsClose?.addEventListener('click', (e)=>{ e.stopPropagation(); closeSettings(); });
+
+        document.addEventListener('click', (e)=>{
+            if (settingsModal.classList.contains('open') && !settingsModal.contains(e.target) && e.target !== settingsToggle) closeSettings();
+        });
+
+        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') { if (settingsModal.classList.contains('open')) { closeSettings(); return; } if (navPanel.classList.contains('open')) closeNav(); } });
+
+        // Dragging the settings modal (pointer events)
+        let isDragging = false, dragOffsetX = 0, dragOffsetY = 0;
+        settingsDragHandle?.addEventListener('pointerdown', (e)=>{
+            isDragging = true; settingsModal.style.transition = 'none';
+            const rect = settingsModal.getBoundingClientRect(); dragOffsetX = e.clientX - rect.left; dragOffsetY = e.clientY - rect.top; settingsDragHandle.setPointerCapture && settingsDragHandle.setPointerCapture(e.pointerId);
+        });
+        document.addEventListener('pointermove', (e)=>{
+            if (!isDragging) return; let left = e.clientX - dragOffsetX; let top = e.clientY - dragOffsetY; left = Math.max(8, Math.min(window.innerWidth - settingsModal.offsetWidth - 8, left)); top = Math.max(8, Math.min(window.innerHeight - settingsModal.offsetHeight - 8, top)); settingsModal.style.left = left + 'px'; settingsModal.style.top = top + 'px'; settingsModal.style.transform = 'none';
+        });
+        document.addEventListener('pointerup', (e)=>{ if (!isDragging) return; isDragging = false; settingsModal.style.transition = ''; settingsDragHandle.releasePointerCapture && settingsDragHandle.releasePointerCapture(e.pointerId); });
+
+        // --- Star density control ---
+        const starField = document.getElementById('starfield');
+        const starDensityInput = document.getElementById('star-density');
+        function setStarCount(n){
+            if (!starField) return;
+            const existing = Array.from(starField.querySelectorAll('.star'));
+            const cur = existing.length;
+            if (cur < n) {
+                for (let i=0;i<n-cur;i++){
+                    const s = document.createElement('div'); s.className = 'star';
+                    s.style.left = (Math.random()*100) + 'vw'; s.style.top = (Math.random()*100) + 'vh'; s.style.opacity = (0.4 + Math.random()*0.7).toString();
+                    const size = Math.random() > 0.85 ? 3 : (Math.random() > 0.6 ? 2 : 1); s.style.width = size + 'px'; s.style.height = size + 'px';
+                    starField.appendChild(s);
+                }
+            } else if (cur > n) {
+                for (let i=0;i<cur-n;i++) existing[i].remove();
+            }
+        }
+        if (starDensityInput) {
+            starDensityInput.addEventListener('input', ()=>{ setStarCount(parseInt(starDensityInput.value,10)); localStorage.setItem('starDensity', starDensityInput.value); });
+        }
+        const savedStars = parseInt(localStorage.getItem('starDensity'), 10);
+        setStarCount(!isNaN(savedStars) ? savedStars : (starDensityInput ? parseInt(starDensityInput.value,10) : 150));
+
+        // --- Music controls ---
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        const musicCheckbox = document.getElementById('music-toggle');
+        const musicVol = document.getElementById('music-volume');
+
+        function setMusicOn(on){ if (!backgroundAudio) return; if (on){ backgroundAudio.muted = false; backgroundAudio.play().catch(()=>{}); } else { backgroundAudio.pause(); backgroundAudio.muted = true; } localStorage.setItem('musicOn', on ? 'true' : 'false'); updateMusicIndicator(on ? 'playing' : 'paused'); }
+        musicCheckbox?.addEventListener('change', ()=> setMusicOn(musicCheckbox.checked));
+        musicVol?.addEventListener('input', ()=>{ if (backgroundAudio) backgroundAudio.volume = parseFloat(musicVol.value); localStorage.setItem('musicVolume', musicVol.value); });
+
+        const savedMusic = localStorage.getItem('musicOn') === 'true'; const savedVol = parseFloat(localStorage.getItem('musicVolume'));
+        if (!isNaN(savedVol) && backgroundAudio) backgroundAudio.volume = savedVol; if (musicVol && !isNaN(savedVol)) musicVol.value = savedVol;
+        if (musicCheckbox) musicCheckbox.checked = savedMusic;
+        // Do NOT auto-play on load. Keep audio paused & muted until the user initiates (click start) or scrolls into main content.
+        if (backgroundAudio) { backgroundAudio.pause(); backgroundAudio.muted = true; updateMusicIndicator('paused'); }
+        // Start music when user scrolls into the main content — only if the music toggle is enabled by user
+        let musicAutoStarted = false;
+        const mainEl = document.getElementById('main-content');
+        if (mainEl) {
+          const mainObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !musicAutoStarted) {
+                musicAutoStarted = true;
+                if (musicCheckbox && musicCheckbox.checked) setMusicOn(true);
+                mainObserver.disconnect();
+              }
+            });
+          }, { threshold: 0.08 });
+          mainObserver.observe(mainEl);
+        }
+
+
+        // --- Scroll reveal observer + reset on reaching top ---
+        const observerOptions = { threshold: 0.12 };
+        const observer = new IntersectionObserver((entries)=>{ entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions);
+        document.querySelectorAll('.fade-section').forEach(el => { observer.observe(el); });
+
+        let lastAtTop = window.scrollY <= 10;
+        function resetRevealOnTop(){ const atTop = window.scrollY <= 10; if (atTop && !lastAtTop){ document.querySelectorAll('.fade-section.visible').forEach(el => { el.classList.remove('visible'); try{ observer.unobserve(el); }catch(e){} observer.observe(el); }); } lastAtTop = atTop; }
+        window.addEventListener('scroll', ()=>{ if (window._resetRevealRAF) return; window._resetRevealRAF = true; requestAnimationFrame(()=>{ resetRevealOnTop(); window._resetRevealRAF = false; }); }, { passive: true });
+        window.addEventListener('load', ()=> { lastAtTop = window.scrollY <= 10; });
+
+        // Reset reveals button
+        document.getElementById('reset-reveals')?.addEventListener('click', ()=>{ document.querySelectorAll('.fade-section.visible').forEach(el=>{ el.classList.remove('visible'); try{ observer.unobserve(el); }catch(e){} observer.observe(el); }); closeSettings(); });
+        document.getElementById('reset-modal-pos')?.addEventListener('click', ()=>{ settingsModal.style.left = ''; settingsModal.style.top = ''; settingsModal.style.transform = 'translate(-50%,-10%)'; });
+
+        // Wire additional settings controls (animation speed, reduce motion, restore defaults, music play/pause)
+        const animSpeedInput = document.getElementById('anim-speed');
+        const animSpeedLabel = document.getElementById('anim-speed-label');
+        const reduceMotionCheckbox = document.getElementById('reduce-motion');
+        const restoreDefaultsBtn = document.getElementById('restore-defaults');
+        const musicPlayPause = document.getElementById('music-playpause');
+        const settingsOpenBtns = Array.from(document.querySelectorAll('.settings-open'));
+
+        // Open settings from compact footer button (direct call to openSettings)
+        settingsOpenBtns.forEach(b => b.addEventListener('click', openSettings));
+
+        // (floating settings button removed — nav footer opens the modal)
+
+
+        // keep nav toggle interactions simple — no visual pop class required
+
+        // Animation speed (multiplier) — updates CSS variables and persists
+        const baseFade = 0.8; // seconds
+        function applyAnimSpeed(mult){ const dur = (baseFade * parseFloat(mult)).toFixed(2) + 's'; document.documentElement.style.setProperty('--fade-duration', dur); document.documentElement.style.setProperty('--section-duration', dur); localStorage.setItem('animSpeed', mult); if (animSpeedLabel) animSpeedLabel.textContent = mult + '×'; }
+        if (animSpeedInput){ animSpeedInput.addEventListener('input', ()=> applyAnimSpeed(animSpeedInput.value)); const savedAnim = localStorage.getItem('animSpeed') || '1'; animSpeedInput.value = savedAnim; applyAnimSpeed(savedAnim); }
+
+        // Reduce motion
+        if (reduceMotionCheckbox){ reduceMotionCheckbox.addEventListener('change', ()=>{ if (reduceMotionCheckbox.checked) document.documentElement.classList.add('reduce-motion'); else document.documentElement.classList.remove('reduce-motion'); localStorage.setItem('reduceMotion', reduceMotionCheckbox.checked ? 'true' : 'false'); }); const savedReduce = localStorage.getItem('reduceMotion') === 'true'; reduceMotionCheckbox.checked = savedReduce; if (savedReduce) document.documentElement.classList.add('reduce-motion'); }
+
+        // Music play/pause (button), sync checkbox
+        if (musicPlayPause){ musicPlayPause.addEventListener('click', ()=>{ const on = !(musicCheckbox && musicCheckbox.checked); if (musicCheckbox) musicCheckbox.checked = on; setMusicOn(on); musicPlayPause.textContent = on ? 'Pause' : 'Play'; }); }
+
+        // Restore defaults
+        if (restoreDefaultsBtn){ restoreDefaultsBtn.addEventListener('click', ()=>{
+            // visuals
+            if (starDensityInput) { starDensityInput.value = 150; setStarCount(150); localStorage.removeItem('starDensity'); }
+            if (animSpeedInput) { animSpeedInput.value = 1; applyAnimSpeed('1'); localStorage.removeItem('animSpeed'); }
+            // motion
+            if (reduceMotionCheckbox) { reduceMotionCheckbox.checked = false; document.documentElement.classList.remove('reduce-motion'); localStorage.removeItem('reduceMotion'); }
+            // audio
+            if (musicVol) { musicVol.value = 0.6; if (backgroundAudio) backgroundAudio.volume = 0.6; localStorage.removeItem('musicVolume'); }
+            if (musicCheckbox) { musicCheckbox.checked = false; setMusicOn(false); localStorage.removeItem('musicOn'); }
+            closeSettings();
+        }); }
+
+        // Accessibility: also allow compact footer button to open settings via Enter/Space
+        settingsOpenBtns.forEach(b => { b.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSettings(); } }); });
+
+        // Global music indicator helper (available to all scopes)
+        function updateMusicIndicator(state) {
+            const musicIndicator = document.getElementById('music-indicator');
+            if (!musicIndicator) return;
+            musicIndicator.innerHTML = '';
+            const icon = document.createElement('i');
+            icon.classList.add('w-5', 'h-5');
+            if (state === 'playing') icon.setAttribute('data-lucide', 'volume-2'); else icon.setAttribute('data-lucide', 'volume-x');
+            musicIndicator.appendChild(icon);
+            lucide.createIcons();
+        }
+    });
+    </script>
 </body>
 
 </html>
-
